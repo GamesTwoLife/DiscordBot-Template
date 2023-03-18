@@ -2,13 +2,15 @@ const { Kazagumo } = require("kazagumo");
 const { Connectors } = require("shoukaku");
 const Spotify = require('kazagumo-spotify');
 
+const { spotifyClientId, spotifyClientSecret } = require("./../../config-example.json")
+
 module.exports = class KazagumoClient extends Kazagumo {
     constructor(client) {
         super({
             plugins: [
                 new Spotify({
-                    clientId: 'b157d9b2de1b4bb0a8d9e8df6e6ee9da',
-                    clientSecret: 'b38e692a35e74756bd8932bae6f5f302',
+                    clientId: spotifyClientId,
+                    clientSecret: spotifyClientSecret,
                     playlistPageLimit: 1,
                     albumPageLimit: 1,
                     searchLimit: 25,
