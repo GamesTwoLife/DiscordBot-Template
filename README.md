@@ -90,7 +90,7 @@ npm start
 
 **GamesTwoLife**
 
-- Github: [@GamesTwoLife](https://github.com/GamesTwoLife)[слідкуй сюди]
+- Github: [@GamesTwoLife](https://github.com/GamesTwoLife)
 
 ### Дописувачі
 
