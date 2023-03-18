@@ -20,7 +20,7 @@ const UserDB = require("./db/users");
 const client = new Client({ 
 	allowedMentions: { parse: [ "roles", "users", "everyone" ] }, 
 	intents: [Object.keys(GatewayIntentBits)], 
-	partials: [Partials],
+	partials: [Object.keys(Partials)],
 	ws: {
 		large_threshold: 250,
 		properties: {
