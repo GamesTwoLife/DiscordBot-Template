@@ -25,7 +25,7 @@ module.exports = class KazagumoClient extends Kazagumo {
         }, new Connectors.DiscordJS(client), [{
             name: 'Node 1',
             url: 'localhost:2333',
-            auth: 'musicserverforufamily',
+            auth: 'passwordlavalinkserver',
             secure: false
         }], {
             moveOnDisconnect: false,
