@@ -19,9 +19,11 @@ module.exports = {
             await message.react('👀');
         }
 
-        const user = await client.dbuser.getUserById(author.id);
+        const guild_data = await client.dbguild.getGuildById(guild.id);
+        const user_data = await client.dbuser.getUserById(author.id);
 
-        if (!user) await client.dbuser.createUser({ userID: author.id });
+        if (!guild_data) await client.dbguild.createGuild({ guildID: guild.id });
+        if (!user_data) await client.dbuser.createUser({ userID: author.id });
 
         return;
     }
