@@ -1,5 +1,9 @@
 const { readdirSync } = require("fs");
 
+/**
+ * 
+ * @param {import("./../../typings").MainClient} client 
+ */
 module.exports = (client) => {
     readdirSync("./components/autocomplete/").forEach(async (module) => {
         const autocompleteFiles = readdirSync(`./components/autocomplete/${module}`).filter(file => file.endsWith(".js"));

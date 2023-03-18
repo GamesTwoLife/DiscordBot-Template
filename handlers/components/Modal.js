@@ -1,5 +1,9 @@
 const { readdirSync } = require("fs");
 
+/**
+ * 
+ * @param {import("./../../typings").MainClient} client 
+ */
 module.exports = (client) => {
     readdirSync("./components/modals/").forEach(async (module) => {
         const modalFiles = readdirSync(`./components/modals/${module}`).filter(file => file.endsWith(".js"));

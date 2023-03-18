@@ -1,5 +1,9 @@
 const { readdirSync } = require("fs");
 
+/**
+ * 
+ * @param {import("./../../typings").MainClient} client 
+ */
 module.exports = (client) => {
     readdirSync("./components/buttons/").forEach(async (module) => {
         const buttonFiles = readdirSync(`./components/buttons/${module}`).filter(file => file.endsWith(".js"));
