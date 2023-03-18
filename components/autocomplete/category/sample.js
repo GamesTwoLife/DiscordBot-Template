@@ -1,0 +1,35 @@
+/**
+ * @description Limit string.
+ * @param {String} str input string
+ * @param {Number} n number to slice
+ * @param {String} symb string for slice
+ */
+function limitStr(str, n, symb) {
+	if (!n && !symb) return str;
+	symb = symb || '...';
+	if(str.length > n) return str.slice(0, n - symb.length) + symb;
+	return str.slice(0, n - symb.length);
+}
+
+/**
+ * @type {import("../../../typings").AutocompleteInteraction}
+ */
+module.exports = {
+    name: "sample",
+
+    async execute(interaction) {
+        const { client, options } = interaction;
+
+		const focusedValue = options.getFocused();
+		if (focusedValue.length == 0) return interaction.respond([]);
+
+		const choices = ['Популярні теми: Потоки', 'Шардинг: Початок роботи', 'Бібліотека: Голосові з’єднання', 'Взаємодії: Відповідь на (/) команди', 'Популярні теми: Попередній перегляд для вставлення'];
+		const filtered = choices.filter(choice => choice.startsWith(focusedValue));
+
+		await interaction.respond(
+			filtered.map(choice => ({ name: choice, value: choice })),
+		);
+
+		return;
+    }
+}

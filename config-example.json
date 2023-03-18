@@ -1,0 +1,10 @@
+{
+    "token": "", // Токен бота
+    "mongoURL": "mongodb+srv://<username>:<password>@cluster0.grpirss.mongodb.net/<db_name>?retryWrites=true&w=majority",
+    "clientId": "", // ID Бота
+    "channelId": "", // ID Каналу для логів
+    "guildId": "", // ID Сервера Підтримки (Сервера Розробки)
+    "spotifyClientId": "", // Spotify Client ID
+    "spotifyClientSecret": "", // Spotify Client Secret
+    "developers": [] // Масив ID Розробників
+}
