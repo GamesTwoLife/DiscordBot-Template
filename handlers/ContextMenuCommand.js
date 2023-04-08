@@ -11,6 +11,7 @@ module.exports = (client) => {
         for (const contextMenuCommandFile of contextMenuCommandFiles) {
             const contextMenuCommand = require(`./../commands/ContextMenu/${module}/${contextMenuCommandFile}`);
             const keyName = `${module.toUpperCase()} ${contextMenuCommand.data.name}`;
+            contextMenuCommand.folder = module;
             client.contextMenuCommands.set(keyName, contextMenuCommand);
             console.log(`[ContextMenuCommandHandler] Команда контектного меню ${contextMenuCommand.data.name} (${module.toUpperCase()}) завантажена`);
         }

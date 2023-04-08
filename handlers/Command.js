@@ -11,6 +11,7 @@ module.exports = (client) => {
 
         for (const commandFile of commandFiles) {
             const command = require(`./../commands/${module}/${commandFile}`);
+            command.folder = module;
             client.commands.set(command.data.name, command);
             console.log(`[CommandHandler] Команда ${command.data.name} завантажена`);
         }

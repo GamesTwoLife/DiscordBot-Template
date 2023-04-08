@@ -9,6 +9,10 @@ module.exports = {
         .setType(ApplicationCommandType.Message)
         .setDMPermission(true),
     async execute(interaction) {
-        await interaction.editReply({ content: "Це відповідь на команду контекстного меню повідомлення", ephemeral: true });
+        if (!interaction.isMessageContextMenuCommand()) return;
+
+        const { targetId, targetMessage } = interaction;
+
+        await interaction.editReply({ content: `"Це відповідь на команду контекстного меню повідомлення\nID повідомлення: ${targetId}\nКонтент повідомлення: ${targetMessage}`, ephemeral: true });
     }
 };

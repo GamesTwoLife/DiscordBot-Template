@@ -1,17 +1,4 @@
 /**
- * @description Limit string.
- * @param {String} str input string
- * @param {Number} n number to slice
- * @param {String} symb string for slice
- */
-function limitStr(str, n, symb) {
-	if (!n && !symb) return str;
-	symb = symb || '...';
-	if(str.length > n) return str.slice(0, n - symb.length) + symb;
-	return str.slice(0, n - symb.length);
-}
-
-/**
  * @type {import("../../../typings").AutocompleteInteraction}
  */
 module.exports = {

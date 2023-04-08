@@ -1,10 +1,10 @@
 {
-    "token": "", // Токен бота
-    "mongoURL": "mongodb+srv://<username>:<password>@cluster0.grpirss.mongodb.net/<db_name>?retryWrites=true&w=majority",
-    "clientId": "", // ID Бота
-    "channelId": "", // ID Каналу для логів
-    "guildId": "", // ID Сервера Підтримки (Сервера Розробки)
-    "spotifyClientId": "", // Spotify Client ID
-    "spotifyClientSecret": "", // Spotify Client Secret
-    "developers": [] // Масив ID Розробників
+    "token": "токен_бота",
+    "mongoURL": "посилання_на_підключення_до_монго",
+    "clientId": "id_бота",
+    "channelId": "id_каналу_для_логів",
+    "guildId": "id_сервера_підтримки_або_розробки",
+    "spotifyClientId": "id_SpotifyClient",
+    "spotifyClientSecret": "id_SpotifyClientSecret",
+    "developers": ["ID Розробника 1", "ID Розробника 2"]
 }
