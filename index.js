@@ -56,9 +56,9 @@ process.on('unhandledRejection', async (error) => {
 	/**
 	 * @type {import("discord.js").TextChannel}
 	 */
-	const channel = await guild.channels.cache.get(channelId);
+	const channel = await guild.channels.fetch(channelId);
 
-	if (!guild || !guild) return console.error(error);
+	if (!guild || !channel) return console.error(error);
 
 	try {
 		const webhooks = await channel.fetchWebhooks();
@@ -106,9 +106,9 @@ process.on('uncaughtException', async (error) => {
 	/**
 	 * @type {import("discord.js").TextChannel}
 	 */
-	const channel = await guild.channels.cache.get(channelId);
+	const channel = await guild.channels.fetch(channelId);
 
-	if (!guild || !guild) return console.error(error);
+	if (!guild || !channel) return console.error(error);
 
 	try {
 		const webhooks = await channel.fetchWebhooks();
@@ -154,9 +154,9 @@ process.on('rejectionHandled', async (error) => {
 	/**
 	 * @type {import("discord.js").TextChannel}
 	 */
-	const channel = await guild.channels.cache.get(channelId);
+	const channel = await guild.channels.fetch(channelId);
 
-	if (!guild || !guild) return console.error(error);
+	if (!guild || !channel) return console.error(error);
 
 	try {
 		const webhooks = await channel.fetchWebhooks();
@@ -202,9 +202,9 @@ process.on('warning', async (warning) => {
 	/**
 	 * @type {import("discord.js").TextChannel}
 	 */
-	const channel = await guild.channels.cache.get(channelId);
+	const channel = await guild.channels.fetch(channelId);
 
-	if (!guild || !guild) return console.error(error);
+	if (!guild || !channel) return console.error(error);
 
 	try {
 		const webhooks = await channel.fetchWebhooks();
