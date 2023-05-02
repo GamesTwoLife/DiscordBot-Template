@@ -12,7 +12,7 @@ module.exports = {
 
 		// Бот покидає канал, якщо в ньому нема учасників
         if (guild.members.cache.get(client.user.id)?.voice?.channel) {
-            let player = await client.manager.getPlayer(guild.id)
+            let player = client.manager.getPlayer(guild.id)
 
             if (guild.members.cache.get(client.user.id).voice.channel && guild.members.cache.get(client.user.id).voice.channel.members.size <= 1 && player) {
                 player.destroy();
@@ -20,12 +20,13 @@ module.exports = {
         } 
 
 		// Приватні кімнати
-        let voiceChanneld = "0";
-        if (member.voice?.channel?.id === voiceChanneld) {
+        let voiceChanneId = "0";
+		let voiceParentChanneId = "0";
+        if (member.voice?.channel?.id === voiceChanneId) {
             await guild.channels.create({
                 name: `🔴 ${member.user.discriminator}`,
                 type: ChannelType.GuildVoice,
-                parent: "1085040072417615922",
+                parent: voiceParentChanneId,
             }).then(async (newChannel) => {
                 await newState.setChannel(newChannel);
 
@@ -68,11 +69,12 @@ module.exports = {
 						.setStyle(ButtonStyle.Secondary),
 				]);
 
+				// Повідомлення відправляеться у голосовий чат щойно створенного каналу
                 await newChannel.send({
 					content: `||${member}||`,
 					embeds: [{
 						color: 0x2f3136,
-						title: 'Управління кімнатою',
+						title: 'Керування приватною кімнатою',
 						description: "<:rename:1036764520162537473> — змінити назву\n" +
                         "<:limit:1036764518702919760> — встановити ліміт користувачів\n" +
                         "<:kick:1036764509035036705> — вигнати користувача\n" +
@@ -84,7 +86,7 @@ module.exports = {
             });
         }
 
-        if (oldState.channel?.id !== voiceChanneld && oldState.channel?.parent?.id === "0" && oldState.channel?.members.size == 0) {
+        if (oldState.channel?.id !== voiceChanneId && oldState.channel?.parent?.id === voiceParentChanneId && oldState.channel?.members.size == 0) {
 			return oldState.channel.delete();
 		}
     }
