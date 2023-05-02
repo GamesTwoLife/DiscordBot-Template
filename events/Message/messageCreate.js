@@ -9,7 +9,6 @@ module.exports = {
     async execute(message) {
         const { client, author, guild, channel } = message;
 
-        if (guild.id !== "1079879686076772394") return;
         if (author.bot) return;
         if (channel.type === ChannelType.DM || channel.type === ChannelType.GroupDM) return;
 
@@ -20,10 +19,10 @@ module.exports = {
         }
 
         const guild_data = await client.dbguild.getGuildById(guild.id);
-        const user_data = await client.dbuser.getUserById(author.id);
+        const user_data = await client.dbuser.getUserById(guild.id, author.id);
 
         if (!guild_data) await client.dbguild.createGuild({ guildID: guild.id });
-        if (!user_data) await client.dbuser.createUser({ userID: author.id });
+        if (!user_data) await client.dbuser.createUser({ guildID: guild.id, userID: author.id });
 
         return;
     }

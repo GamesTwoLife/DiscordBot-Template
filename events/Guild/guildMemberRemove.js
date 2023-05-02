@@ -9,8 +9,8 @@ module.exports = {
     async execute(member) {
         const { client, guild } = member;
 
-        const user = await client.dbuser.getUserById(member.id);
+        const user = await client.dbuser.getUserById(guild.id, member.id);
 
-        if (user) await client.dbuser.deleteUserById(member.id);
+        if (user) await client.dbuser.deleteUserById(guild.id, member.id);
     }
 };

@@ -7,10 +7,10 @@ module.exports = {
      * @param {import("discord.js").GuildMember & { client: import('../../typings').MainClient }} member
      */
     async execute(member) {
-        const { client } = member;
+        const { client, guild } = member;
 
-        const user = await client.dbuser.getUserById(member.id);
+        const user = await client.dbuser.getUserById(guild.id, member.id);
 
-        if (!user) await client.dbuser.createUser({ userID: member.id });
+        if (!user) await client.dbuser.createUser({ guildID: guild.id, userID: member.id });
     }
 };
