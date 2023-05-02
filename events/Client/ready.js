@@ -1,4 +1,4 @@
-const { Events } = require("discord.js");
+const { Events, ActivityType } = require("discord.js");
 
 module.exports = {
     name: Events.ClientReady,
@@ -9,5 +9,10 @@ module.exports = {
      */
     execute(client) {
         console.log(`Готовий! Увійшли як ${client.user.tag}`);
+
+        client.user.setPresence({ 
+            activities: [{ name: "DiscordBotTemplate by GamesTwoLife", type: ActivityType.Watching }], 
+            status: 'idle' 
+        });
     }
 };
