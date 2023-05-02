@@ -13,6 +13,6 @@ module.exports = {
 
         const { targetId, targetMessage } = interaction;
 
-        await interaction.editReply({ content: `"Це відповідь на команду контекстного меню повідомлення\nID повідомлення: ${targetId}\nКонтент повідомлення: ${targetMessage}`, ephemeral: true });
+        await interaction.editReply({ content: `Це відповідь на команду контекстного меню повідомлення\nID повідомлення: ${targetId}\nКонтент повідомлення: ${targetMessage}`, ephemeral: true });
     }
 };
