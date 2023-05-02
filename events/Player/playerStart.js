@@ -17,7 +17,6 @@ module.exports = {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(0x2f3136)
-                        .setThumbnail(`${track.thumbnail}`)
                         .setTitle(`${track.title}`)
                         .setURL(`${track.uri || track.realUri}`)
                         .addFields([
