@@ -1,6 +1,7 @@
 const { Kazagumo } = require("kazagumo");
 const { Connectors } = require("shoukaku");
 const Spotify = require('kazagumo-spotify');
+const Deezer = require('stone-deezer');
 
 const { spotifyClientId, spotifyClientSecret } = require("./../../config-example.json")
 
@@ -15,9 +16,12 @@ module.exports = class KazagumoClient extends Kazagumo {
                     albumPageLimit: 1,
                     searchLimit: 25,
                     searchMarket: 'UA',
-                })
+                }),
+                new Deezer({
+                    playlistLimit: 25
+                }),
             ],
-            defaultSearchEngine: "youtube_music",
+            defaultSearchEngine: "spotify",
             send: (guildId, payload) => {
                 const guild = client.guilds.cache.get(guildId);
                 if (guild) guild.shard.send(payload);
@@ -29,9 +33,12 @@ module.exports = class KazagumoClient extends Kazagumo {
             secure: false
         }], {
             moveOnDisconnect: false,
+            resume: true,
+            resumeKey: "MusicNode",
             resumable: false,
-            resumableTimeout: 30,
+            resumeTimeout: 30,
             reconnectTries: 2,
+            userAgent: "DiscordBot",
             restTimeout: 10000
         });
     }
