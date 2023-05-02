@@ -1,5 +1,5 @@
 const { Events, Collection } = require("discord.js")
-const { developers } = require("../../config.json");
+const { developers, guildId } = require("../../config.json");
 
 module.exports = {
     name: Events.InteractionCreate,
@@ -9,8 +9,6 @@ module.exports = {
      */
     async execute(interaction) {
         const { client, guild, member } = interaction;
-
-		if (guild.id !== "1079879686076772394") return interaction.reply({ content: "Нажаль, але цю команду можна використовувати лише на одному сервері!", ephemeral: true });
 
         if (!interaction.isChatInputCommand()) return;
 
