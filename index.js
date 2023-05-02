@@ -21,11 +21,8 @@ const client = new Client({
 	allowedMentions: { parse: [ "roles", "users", "everyone" ] }, 
 	intents: [Object.keys(GatewayIntentBits)], 
 	partials: [Object.keys(Partials)],
-	ws: {
+	ws: { 
 		large_threshold: 250,
-		properties: {
-			browser: "Discord iOS"
-		}
 	}
 });
 
@@ -47,6 +44,7 @@ mongoose.Promise = Promise;
 mongoose.connect(mongoURL);
 mongoose.connection.on('error', (error) => console.log(error));
 
+// Анти-аварія
 process.on('unhandledRejection', async (error) => {
 	/**
 	 * @type {import("discord.js").Guild}
@@ -96,7 +94,6 @@ process.on('unhandledRejection', async (error) => {
 		console.error('Помилка при спробі надіслати повідомлення: ', error);
 	}
 });
-
 process.on('uncaughtException', async (error) => {
 	/**
 	 * @type {import("discord.js").Guild}
@@ -144,7 +141,6 @@ process.on('uncaughtException', async (error) => {
 		console.error('Помилка при спробі надіслати повідомлення: ', error);
 	}
 });
-
 process.on('rejectionHandled', async (error) => {
 	/**
 	 * @type {import("discord.js").Guild}
@@ -192,7 +188,6 @@ process.on('rejectionHandled', async (error) => {
 		console.error('Помилка при спробі надіслати повідомлення: ', error);
 	}
 });
-
 process.on('warning', async (warning) => {
 	/**
 	 * @type {import("discord.js").Guild}
