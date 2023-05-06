@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/GamesTwoLife/DiscordBot-Template#readme",
   "dependencies": {
-    "discord.js": "^14.10.2",
+    "discord.js": "^14.11.0",
     "fs": "^0.0.1-security",
     "kazagumo": "^2.3.2",
     "kazagumo-spotify": "^1.2.0",
