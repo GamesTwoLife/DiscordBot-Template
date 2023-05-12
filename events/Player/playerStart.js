@@ -11,7 +11,7 @@ module.exports = {
      */
     async execute(player, track, client) {
         if (player.playing) {
-            const channel = await client.channels.cache.get(player.textId);
+            const channel = await client.channels.fetch(player.textId);
 
             await channel.send({
                 embeds: [

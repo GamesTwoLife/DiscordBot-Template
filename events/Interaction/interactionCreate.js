@@ -42,7 +42,7 @@ module.exports = {
 			if (now < expirationTime) {
 				const timeLeft = (expirationTime - now) / 1000;
 				await interaction.reply({
-					content: `Зачекайте ${timeLeft.toFixed(1)} секунд(и), перед повторним використанням команди </${interaction.commandName}:${interaction.commandId}>`,
+					content: `Зачекайте **${timeLeft.toFixed(1)}** секунд(и), перед повторним використанням команди </${interaction.commandName}:${interaction.commandId}>`,
 					ephemeral: true,
 				}).catch(() => {});
 				return;
