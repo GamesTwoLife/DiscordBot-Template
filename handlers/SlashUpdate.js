@@ -17,11 +17,14 @@ module.exports = (client) => {
         try {
             console.log(`Розпочато оновлення ${commandsJSONData.length} (/) команд програми.`);
 
-            //const data = await rest.put(Routes.applicationCommands(clientId), { body: commandsJSONData });
+            /**
+             * await rest.put(Routes.applicationCommands(clientId), { body: commandsJSONData }); - реєструє глобальні команди, котрі з'являться на всіх серверах на протязі 1 години
+             * await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commandsJSONData }); - реєструє команди тільки на одному сервері, з'являються миттєво
+             */
 
             const data = await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commandsJSONData });
     
-            console.log(`Успішно перезавантажено ${data.length} (/) команди програми.`);
+            console.log(`Успішно перезавантажено ${data.length} (/) команд програми.`);
         } catch (error) {
             console.error(error);
         }
