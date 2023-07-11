@@ -15,6 +15,32 @@ module.exports = {
 
         if (!button) return;
 
+        const { cooldowns } = client;
+
+		if (!cooldowns.has(interaction.customId)) {
+			cooldowns.set(interaction.customId, new Collection());
+		}
+
+		const now = Date.now();
+		const timestamps = cooldowns.get(interaction.customId);
+		const cooldownAmount = (button.options?.cooldown || 3) * 1000;
+
+		if (timestamps.has(member.id)) {
+			const expirationTime = timestamps.get(member.id) + cooldownAmount;
+
+			if (now < expirationTime) {
+				const timeLeft = (expirationTime - now) / 1000;
+				await interaction.reply({
+					content: `Зачекайте **${timeLeft.toFixed(1)}** секунд(и), перед повторним використанням кнопки ${interaction.customId}`,
+					ephemeral: true,
+				}).catch(() => {});
+				return;
+			}
+		}
+
+		timestamps.set(member.id, now);
+		setTimeout(() => timestamps.delete(member.id), cooldownAmount);
+
         try {
             await button.execute(interaction);
             return;
