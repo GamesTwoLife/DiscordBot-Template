@@ -52,6 +52,10 @@ export interface ContextMenuCommand {
  */
 export interface ButtonInteraction {
     id: string;
+    options: {
+        cooldown?: number,
+        ownerOnly?: boolean
+    };
 
     execute(interaction: Discord.ButtonInteraction & { client: MainClient }): void | Promise<void>;
 };
@@ -61,6 +65,10 @@ export interface ButtonInteraction {
  */
 export interface SelectMenuInteraction {
     id: string;
+    options: {
+        cooldown?: number,
+        ownerOnly?: boolean
+    };
 
     execute(interaction: Discord.AnySelectMenuInteraction & { client: MainClient }): void | Promise<void>;
 };
