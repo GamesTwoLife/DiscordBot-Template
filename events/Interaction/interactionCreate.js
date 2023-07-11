@@ -1,5 +1,5 @@
 const { Events, Collection } = require("discord.js")
-const { developers, guildId } = require("../../config.json");
+const { developers } = require("../../config.json");
 
 module.exports = {
     name: Events.InteractionCreate,

@@ -19,6 +19,7 @@ module.exports = {
                         .setColor(0x2f3136)
                         .setTitle(`${track.title}`)
                         .setURL(`${track.uri || track.realUri}`)
+                        .setThumbnail(track.thumbnail || null)
                         .addFields([
                             { name: `Замовник`, value: `${track.requester}`, inline: true },
                             { name: `Автор`, value: `${track.author}`, inline: true },

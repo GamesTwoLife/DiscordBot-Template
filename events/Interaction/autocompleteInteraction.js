@@ -18,7 +18,8 @@ module.exports = {
         try {
             await autocomplete.execute(interaction);
         } catch (error) {
-            return console.log(error);
+            console.log(error);
+            return interaction.respond([]);
         }
         return;
     }
