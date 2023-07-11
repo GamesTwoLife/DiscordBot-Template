@@ -1,6 +1,6 @@
 const { Client, GatewayIntentBits, Partials, Collection } = require("discord.js");
 const mongoose = require("mongoose");
-const { token, guildId, channelId, mongoURL } = require("./config.json");
+const { token, channelId, mongoURL } = require("./config.json");
 const Event = require("./handlers/Event");
 const Command = require("./handlers/Command");
 const ContextMenuCommand = require("./handlers/ContextMenuCommand");
@@ -47,16 +47,11 @@ mongoose.connection.on('error', (error) => console.log(error));
 // Анти-аварія
 process.on('unhandledRejection', async (error) => {
 	/**
-	 * @type {import("discord.js").Guild}
-	 */
-	const guild = await client.guilds.cache.get(guildId);
-
-	/**
 	 * @type {import("discord.js").TextChannel}
 	 */
-	const channel = await guild.channels.fetch(channelId);
+	const channel = await client.channels.fetch(channelId);
 
-	if (!guild || !channel) return console.error(error);
+	if (!channel) return console.error(error);
 
 	try {
 		const webhooks = await channel.fetchWebhooks();
@@ -96,16 +91,11 @@ process.on('unhandledRejection', async (error) => {
 });
 process.on('uncaughtException', async (error) => {
 	/**
-	 * @type {import("discord.js").Guild}
-	 */
-	const guild = await client.guilds.cache.get(guildId);
-
-	/**
 	 * @type {import("discord.js").TextChannel}
 	 */
-	const channel = await guild.channels.fetch(channelId);
+	const channel = await client.channels.fetch(channelId);
 
-	if (!guild || !channel) return console.error(error);
+	if (!channel) return console.error(error);
 
 	try {
 		const webhooks = await channel.fetchWebhooks();
@@ -143,16 +133,11 @@ process.on('uncaughtException', async (error) => {
 });
 process.on('rejectionHandled', async (error) => {
 	/**
-	 * @type {import("discord.js").Guild}
-	 */
-	const guild = await client.guilds.cache.get(guildId);
-
-	/**
 	 * @type {import("discord.js").TextChannel}
 	 */
-	const channel = await guild.channels.fetch(channelId);
+	const channel = await client.channels.fetch(channelId);
 
-	if (!guild || !channel) return console.error(error);
+	if (!channel) return console.error(error);
 
 	try {
 		const webhooks = await channel.fetchWebhooks();
@@ -190,16 +175,11 @@ process.on('rejectionHandled', async (error) => {
 });
 process.on('warning', async (warning) => {
 	/**
-	 * @type {import("discord.js").Guild}
-	 */
-	const guild = await client.guilds.cache.get(guildId);
-
-	/**
 	 * @type {import("discord.js").TextChannel}
 	 */
-	const channel = await guild.channels.fetch(channelId);
+	const channel = await client.channels.fetch(channelId);
 
-	if (!guild || !channel) return console.error(error);
+	if (!channel) return console.error(error);
 
 	try {
 		const webhooks = await channel.fetchWebhooks();
