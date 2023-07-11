@@ -27,18 +27,17 @@ module.exports = class KazagumoClient extends Kazagumo {
                 if (guild) guild.shard.send(payload);
             }
         }, new Connectors.DiscordJS(client), [{
-            name: 'Node 1',
+            name: `Node ${client.user.username}`,
             url: 'localhost:2333',
             auth: 'passwordlavalinkserver',
             secure: false
         }], {
             moveOnDisconnect: false,
-            resume: true,
-            resumeKey: "MusicNode",
-            resumable: false,
+            resume: false,
+            resumeKey: `${client.user.username}MusicNode`,
             resumeTimeout: 30,
-            reconnectTries: 2,
-            userAgent: "DiscordBot",
+            reconnectTries: 5,
+            userAgent: `${client.user.username}`,
             restTimeout: 10000
         });
     }
