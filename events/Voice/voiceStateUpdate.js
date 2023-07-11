@@ -4,22 +4,26 @@ module.exports = {
     name: Events.VoiceStateUpdate,
     /**
      * 
-     * @param {import('discord.js').VoiceState & { client: import('../../typings').MainClient } oldState 
-     * @param {import('discord.js').VoiceState & { client: import('../../typings').MainClient } newState 
+     * @param {import('discord.js').VoiceState & { client: import('../../typings').MainClient }} oldState 
+     * @param {import('discord.js').VoiceState & { client: import('../../typings').MainClient }} newState 
      */
     async execute(oldState, newState) {
         const { client, guild, member } = oldState || newState;
 
-		// Бот покидає канал, якщо в ньому нема учасників
-        if (guild.members.cache.get(client.user.id)?.voice?.channel) {
+        if (guild.members.me.voice?.channel) {
+			// Бот автоматично стає спікером якщо приєднується до каналу трибуни (навіть якщо трибуна не розпочата)
+			if (guild.members.me.voice?.channel.type == ChannelType.GuildStageVoice && guild.members.me.voice.suppress) {
+                await guild.members.me.voice.setSuppressed(false);
+            }
+
             let player = client.manager.getPlayer(guild.id)
 
-            if (guild.members.cache.get(client.user.id).voice.channel && guild.members.cache.get(client.user.id).voice.channel.members.size <= 1 && player) {
+			// Бот покидає канал, якщо в ньому нема учасників
+            if (guild.members.me.voice.channel && guild.members.me.voice.channel.members.size <= 1 && player) {
                 player.destroy();
             }
         } 
 
-		// Приватні кімнати
         let voiceChanneId = "0";
 		let voiceParentChanneId = "0";
         if (member.voice?.channel?.id === voiceChanneId) {
