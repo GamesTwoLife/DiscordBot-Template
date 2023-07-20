@@ -41,7 +41,6 @@ module.exports = class KazagumoClient extends Kazagumo {
             resumeKey: "DіscordBotTemplateResumeKey",
             resumeTimeout: 30,
             reconnectTries: 5,
-            userAgent: "DіscordBotTemplate",
             restTimeout: 10000
         });
     }
