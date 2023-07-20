@@ -7,7 +7,7 @@ module.exports = {
      * @param {import('discord.js').ButtonInteraction & { client: import('../../typings').MainClient }} interaction 
      */
     async execute(interaction) {
-        const { client } = interaction;
+        const { client, member } = interaction;
 
         if (!interaction.isButton()) return;
 

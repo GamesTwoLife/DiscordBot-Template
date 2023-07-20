@@ -7,7 +7,7 @@ module.exports = {
      * @param {import('discord.js').ContextMenuCommandInteraction & { client: import('../../typings').MainClient }} interaction 
      */
     async execute(interaction) {
-        const { client } = interaction;
+        const { client, guild, member } = interaction;
 
         if (!interaction.isContextMenuCommand()) return;
 
