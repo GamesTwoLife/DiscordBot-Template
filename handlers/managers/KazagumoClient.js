@@ -6,6 +6,10 @@ const Deezer = require('stone-deezer');
 const { spotifyClientId, spotifyClientSecret } = require("./../../config-example.json")
 
 module.exports = class KazagumoClient extends Kazagumo {
+    /**
+     * 
+     * @param {import("./../../typings").MainClient} client 
+     */
     constructor(client) {
         super({
             plugins: [
