@@ -4,7 +4,5 @@
     "clientId": "id_бота",
     "channelId": "id_каналу_для_логів",
     "guildId": "id_сервера_підтримки_або_розробки",
-    "spotifyClientId": "id_SpotifyClient",
-    "spotifyClientSecret": "id_SpotifyClientSecret",
     "developers": ["ID Розробника 1", "ID Розробника 2"]
 }
