@@ -5,13 +5,13 @@ const { ContextMenuCommandBuilder, ApplicationCommandType } = require("discord.j
  */
 module.exports = {
     data: new ContextMenuCommandBuilder()
-        .setName("sample")
+        .setName("message sample")
         .setType(ApplicationCommandType.Message)
         .setDMPermission(false),
     options: {
+        cooldown: 0,
         ownerOnly: false,
         devGuildOnly: true,
-        cooldown: 0,
         bot_permissions: ["ViewChannel", "SendMessages"],
     },
 
