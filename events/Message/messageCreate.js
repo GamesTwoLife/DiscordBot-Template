@@ -23,7 +23,5 @@ module.exports = {
 
         if (!guild_data) await client.dbguild.createGuild({ guildID: guild.id });
         if (!user_data) await client.dbuser.createUser({ guildID: guild.id, userID: author.id });
-
-        return;
     },
 };

@@ -33,7 +33,7 @@ const client = new Client({
 	presence: {
 		activities: [{
 			name: "custom",
-			state: "DiscordBotTemplate by GamesTwoLife",
+			state: "by GamesTwoLife",
 			type: ActivityType.Custom,
 		}]
 	}
