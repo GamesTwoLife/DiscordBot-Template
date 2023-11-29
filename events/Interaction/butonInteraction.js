@@ -1,4 +1,5 @@
 const { Events, Collection } = require("discord.js")
+const { developers } = require("../../config.json");
 
 module.exports = {
     name: Events.InteractionCreate,
@@ -15,6 +16,10 @@ module.exports = {
             const button = client.buttons.get(interaction.customId);
 
             if (!button) return;
+
+            if (button.options && button.options?.ownerOnly && !developers.includes(user.id)) {
+				return interaction.reply({ content: "Ця кнопка лише для розробників бота!", ephemeral: true });
+			}
 
             const { cooldowns } = client;
 

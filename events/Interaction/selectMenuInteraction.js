@@ -1,4 +1,5 @@
 const { Events, Collection } = require("discord.js")
+const { developers } = require("../../config.json");
 
 module.exports = {
     name: Events.InteractionCreate,
@@ -16,6 +17,10 @@ module.exports = {
             const selectmenu = client.selectMenus.get(interaction.customId);
 
             if (!selectmenu) return;
+
+            if (selectmenu.options && selectmenu.options?.ownerOnly && !developers.includes(user.id)) {
+				return interaction.reply({ content: "Це меню вибору лише для розробників бота!", ephemeral: true });
+			}
 
             if (!cooldowns.has(interaction.customId)) {
                 cooldowns.set(interaction.customId, new Collection());
