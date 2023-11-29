@@ -5,7 +5,7 @@ const { readdirSync } = require("fs");
  * @param {import("./../../typings").MainClient} client 
  */
 module.exports = (client) => {
-    readdirSync("./components/buttons/").forEach(async (module) => {
+    for (const module of readdirSync("./components/buttons/")) {
         const buttonFiles = readdirSync(`./components/buttons/${module}`).filter(file => file.endsWith(".js"));
 
         for (const buttonFile of buttonFiles) {
@@ -13,5 +13,5 @@ module.exports = (client) => {
             client.buttons.set(button.id, button);
             console.log(`[ButtonHandler] Кнопка ${button.id} завантажена`);
         }
-    });
+    }
 };

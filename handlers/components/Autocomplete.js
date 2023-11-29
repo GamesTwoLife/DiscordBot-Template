@@ -5,7 +5,7 @@ const { readdirSync } = require("fs");
  * @param {import("./../../typings").MainClient} client 
  */
 module.exports = (client) => {
-    readdirSync("./components/autocomplete/").forEach(async (module) => {
+    for (const module of readdirSync("./components/autocomplete/")) {
         const autocompleteFiles = readdirSync(`./components/autocomplete/${module}`).filter(file => file.endsWith(".js"));
 
         for (const autocompleteFile of autocompleteFiles) {
@@ -13,5 +13,5 @@ module.exports = (client) => {
             client.autocompletes.set(autocomplete.name, autocomplete);
             console.log(`[AutocompleteHandler] Автозаповнення ${autocomplete.name} завантажено`);
         }
-    });
+    }
 };

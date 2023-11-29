@@ -1,67 +1,28 @@
 const { readdirSync } = require("fs");
 
+const restEvents = ["restDebug", "handlerSweep", "hashSweep", "invalidRequestWarning", "rateLimited", "response"];
+
 /**
  * 
  * @param {import("./../typings").MainClient} client 
  */
 module.exports = (client) => {
-    readdirSync("./events/").forEach(async (folder) => {
-        readdirSync(`./events/${folder}`).forEach(async (file) => {
-            switch (folder) {
-                case 'Client': {
-                    const event = require(`./../events/Client/${file}`);
+    for (const folder of readdirSync("./events/")) {
+        for (const file of readdirSync(`./events/${folder}`)) {
+            const event = require(`./../events/${folder}/${file}`);
 
-                    if (event.once) {
-                        client.once(event.name, (...args) => event.execute(...args));
-                        console.log(`[ClientEventHandler] Подія ${event.name} (${file}) завантажена`);
-                    } else {
-                        client.on(event.name, (...args) => event.execute(...args));
-                        console.log(`[ClientEventHandler] Подія ${event.name} (${file}) завантажена`);
-                    }
-                } break;
-
-                case 'Player': {
-                    const event = require(`./../events/Player/${file}`);
-
-                    client.manager.on(event.name, (...args) => event.execute(...args, client));
-                    console.log(`[PlayerEventHandler] Подія ${event.name} (${file}) завантажена`);
-                } break;
-
-                case 'Node': {
-                    const event = require(`./../events/Node/${file}`);
-
-                    client.manager.shoukaku.on(event.name, (...args) => event.execute(...args, client));
-                    console.log(`[NodeEventHandler] Подія ${event.name} (${file}) завантажена`);
-                } break;
-
-                case 'Interaction': {
-                    const event = require(`./../events/Interaction/${file}`);
-
+            if (event.once) {
+                client.once(event.name, (...args) => event.execute(...args));
+                console.log(`[ClientEventHandler] Подія ${event.name} (${file}) завантажена`);
+            } else {
+                if (restEvents.includes(event.name)) {
+                    client.rest.on(event.name, (...args) => event.execute(...args));
+                    console.log(`[RestEventHandler] Подія ${event.name} (${file}) завантажена`);
+                } else {
                     client.on(event.name, (...args) => event.execute(...args));
-                    console.log(`[InteractionEventHandler] Подія ${event.name} (${file}) завантажена`);
-                } break;
-
-                case 'Message': {
-                    const event = require(`./../events/Message/${file}`);
-
-                    client.on(event.name, (...args) => event.execute(...args));
-                    console.log(`[MessageEventHandler] Подія ${event.name} (${file}) завантажена`);
-                } break;
-            
-                case 'Guild': {
-                    const event = require(`./../events/Guild/${file}`);
-
-                    client.on(event.name, (...args) => event.execute(...args));
-                    console.log(`[GuildEventHandler] Подія ${event.name} (${file}) завантажена`);
-                } break;
-
-                case 'Voice': {
-                    const event = require(`./../events/Voice/${file}`);
-
-                    client.on(event.name, (...args) => event.execute(...args));
-                    console.log(`[VoiceEventHandler] Подія ${event.name} (${file}) завантажена`);
-                } break;
+                    console.log(`[EventHandler] Подія ${event.name} (${file}) завантажена`);
+                }
             }
-        });
-    });
+        }
+    }
 };

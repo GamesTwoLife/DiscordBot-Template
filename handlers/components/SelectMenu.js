@@ -5,7 +5,7 @@ const { readdirSync } = require("fs");
  * @param {import("./../../typings").MainClient} client 
  */
 module.exports = (client) => {
-    readdirSync("./components/selectmenu/").forEach(async (module) => {
+    for (const module of readdirSync("./components/selectmenu/")) {
         const selectMenuFiles = readdirSync(`./components/selectmenu/${module}`).filter(file => file.endsWith(".js"));
 
         for (const selectMenuFile of selectMenuFiles) {
@@ -13,5 +13,5 @@ module.exports = (client) => {
             client.selectMenus.set(selectMenu.id, selectMenu);
             console.log(`[SelectMenuHandler] Меню ${selectMenu.id} завантажено`);
         }
-    });
+    }
 };

@@ -5,8 +5,7 @@ const { readdirSync } = require("fs");
  * @param {import("./../typings").MainClient} client 
  */
 module.exports = (client) => {
-    readdirSync("./commands/").forEach(async (module) => {
-        if (module === "ContextMenu") return;
+    for (const module of readdirSync("./commands/")) {
         const commandFiles = readdirSync(`./commands/${module}`).filter(file => file.endsWith(".js"));
 
         for (const commandFile of commandFiles) {
@@ -15,5 +14,5 @@ module.exports = (client) => {
             client.commands.set(command.data.name, command);
             console.log(`[CommandHandler] Команда ${command.data.name} завантажена`);
         }
-    });
+    }
 };
