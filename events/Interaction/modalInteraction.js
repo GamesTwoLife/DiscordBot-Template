@@ -11,21 +11,25 @@ module.exports = {
 
         if (!interaction.isModalSubmit()) return;
 
-        const modal = client.modals.get(interaction.customId);
-
-        if (!modal) return;
-
         try {
+            const modal = client.modals.get(interaction.customId);
+
+            if (!modal) return;
+
             await modal.execute(interaction);
         } catch (error) {
             console.log(error);
             if (interaction.deferred || interaction.replied) {
-                await interaction.followUp({ content: `Виникла помилка \`${error.message}\` при виконанні модального вікна ${interaction.customId}`, ephemeral: true });
+                await interaction.followUp({ 
+                    content: `Виникла помилка \`${error.message}\` при виконанні модального вікна ${interaction.customId}`, 
+                    ephemeral: true 
+                }).catch(() => {});
             } else {
-                await interaction.reply({ content: `Виникла помилка \`${error.message}\` при виконанні модального вікна ${interaction.customId}`, ephemeral: true });
+                await interaction.reply({ 
+                    content: `Виникла помилка \`${error.message}\` при виконанні модального вікна ${interaction.customId}`, 
+                    ephemeral: true 
+                }).catch(() => {});
             }
         }
-
-        return;
-    }
+    },
 };

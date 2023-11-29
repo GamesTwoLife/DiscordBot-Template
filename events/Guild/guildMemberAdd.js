@@ -12,5 +12,5 @@ module.exports = {
         const user = await client.dbuser.getUserById(guild.id, member.id);
 
         if (!user) await client.dbuser.createUser({ guildID: guild.id, userID: member.id });
-    }
+    },
 };

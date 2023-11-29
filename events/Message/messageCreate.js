@@ -25,5 +25,5 @@ module.exports = {
         if (!user_data) await client.dbuser.createUser({ guildID: guild.id, userID: author.id });
 
         return;
-    }
+    },
 };
