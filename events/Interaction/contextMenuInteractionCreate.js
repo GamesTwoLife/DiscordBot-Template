@@ -13,7 +13,7 @@ module.exports = {
 
         if (interaction.isUserContextMenuCommand() || interaction.isMessageContextMenuCommand()) {
             try {
-                const command = client.contextMenuCommands.get(interaction.commandName);
+                const command = client.commands.get(interaction.commandName);
 
                 if (!command) {
                     return interaction.reply({ content: "Нажаль, такої контекстної команди не існує!", ephemeral: true }).catch(() => {});
