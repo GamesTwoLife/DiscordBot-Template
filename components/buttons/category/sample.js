@@ -8,5 +8,5 @@ module.exports = {
         await interaction.reply({ content: `${interaction.customId}`, ephemeral: true });
 
         return;
-    }
+    },
 };

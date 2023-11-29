@@ -16,7 +16,5 @@ module.exports = {
 		await interaction.respond(
 			filtered.map(choice => ({ name: choice, value: choice })),
 		);
-
-		return;
-    }
-}
+    },
+};
