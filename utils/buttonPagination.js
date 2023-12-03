@@ -3,14 +3,15 @@ const { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilde
 /**
  * 
  * @param {import("discord.js").ChatInputCommandInteraction | import("discord.js").ContextMenuCommandInteraction} interaction Об'єкт ChatInputCommandInteraction або ContextMenuCommandInteraction
- * @param {[EmbedBuilder]} pages Масив ембедів для кожної сторінки
+ * @param {EmbedBuilder[]} pages Масив ембедів для кожної сторінки
  * @param {Number} time Час дії кнопок в мілісекундах
- * @param {[String]} emojis Масив емодзі для кнопок
+ * @param {String[]} emojis Масив емодзі для кнопок
  * @returns 
  */
 module.exports = async (interaction, pages, time = 30 * 1000, emojis = ["⏪", "🏠", "⏩"]) => {
     try {
         if (!interaction || !pages || pages.length === 0) throw new Error("Неправильні аргументи");
+        if (emojis.length < 3 || emojis.length > 3) throw new Error("Вказано менше або більше 3 емодзі в масиві");
 
         await interaction.deferReply();
     
@@ -94,7 +95,7 @@ module.exports = async (interaction, pages, time = 30 * 1000, emojis = ["⏪", "
                     prev.setDisabled(true);
                     home.setDisabled(true);
                     next.setDisabled(true);
-                    
+
                     await msg.edit({
                         components: [buttons]
                     });
