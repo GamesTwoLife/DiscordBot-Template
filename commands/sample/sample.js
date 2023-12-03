@@ -1,4 +1,6 @@
-const { SlashCommandBuilder, ApplicationCommandType, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require("discord.js");
+const { SlashCommandBuilder, ApplicationCommandType, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, EmbedBuilder } = require("discord.js");
+const buttonPagination = require("../../utils/buttonPagination");
+const buttonWrapper = require("../../utils/buttonWrapper");
 
 /**
  * @type {import('../../typings').Command}
@@ -34,6 +36,16 @@ module.exports = {
                 .setName("modal")
                 .setDescription("Sample Modal")
         )
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName("pagination")
+                .setDescription("Sample Pagination")
+        )
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName("buttonwrapper")
+                .setDescription("Sample Button Wrapper")
+        )
         .setDMPermission(false),
     options: {
         ownerOnly: false,
@@ -50,8 +62,7 @@ module.exports = {
                 const Input = options.getString("input", true);
 
                 await interaction.reply({ 
-                    content: `${Input}`,
-                    ephemeral: true 
+                    content: `${Input}`
                 });
             } break;
 
@@ -65,8 +76,7 @@ module.exports = {
 
                 await interaction.reply({ 
                     content: "Кнопка",
-                    components: [row],
-                    ephemeral: true 
+                    components: [row]
                 });
             } break;
 
@@ -84,8 +94,7 @@ module.exports = {
 
                 await interaction.reply({ 
                     content: "Меню",
-                    components: [row],
-                    ephemeral: true 
+                    components: [row]
                 });
             } break;
 
@@ -105,6 +114,41 @@ module.exports = {
                 modal.setComponents(row);
 
                 await interaction.showModal(modal)
+            } break;
+
+            case "pagination": {
+                let pageStrings = [
+                    "Котики найкращі :)", 
+                    "Песики найкращі :)", 
+                    "Україна понад усе!", 
+                    "Слава Україні! Героям Слава!", 
+                    "Крутий шаблон бота"
+                ];
+                let embeds = [];
+
+                for (let i = 0; i < 4; i++) {
+                    embeds.push(new EmbedBuilder().setColor(0x2b2d31).setDescription(`${pageStrings[i]}`));
+                }
+
+                await buttonPagination(interaction, embeds);
+            } break;
+
+            case "buttonwrapper": {
+                const buttons = [
+                    new ButtonBuilder()
+                        .setCustomId("say_hello")
+                        .setStyle(ButtonStyle.Secondary)
+                        .setLabel("Cick Me"),
+                    new ButtonBuilder()
+                        .setLabel("Приєднатись до Української Спільноти")
+                        .setStyle(ButtonStyle.Link)
+                        .setURL("https://discord.gg/ufamily"),
+                ];
+
+                await interaction.reply({ 
+                    content: "Натискайте на кнопки знизу:",
+                    components: buttonWrapper(buttons)
+                });
             } break;
         }
     },
