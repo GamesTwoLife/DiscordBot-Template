@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, ApplicationCommandType } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
 
 /**
  * @type {import('../../typings').Command}

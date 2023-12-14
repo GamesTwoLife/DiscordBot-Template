@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, ApplicationCommandType, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, EmbedBuilder } = require("discord.js");
+const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, EmbedBuilder } = require("discord.js");
 const buttonPagination = require("../../utils/buttonPagination");
 const buttonWrapper = require("../../utils/buttonWrapper");
 
@@ -138,11 +138,11 @@ module.exports = {
                     new ButtonBuilder()
                         .setCustomId("say_hello")
                         .setStyle(ButtonStyle.Secondary)
-                        .setLabel("Cick Me"),
+                        .setLabel("Натисни на мене"),
                     new ButtonBuilder()
-                        .setLabel("Приєднатись до Української Спільноти")
+                        .setLabel("Найкращий шаблон Discord бота")
                         .setStyle(ButtonStyle.Link)
-                        .setURL("https://discord.gg/ufamily"),
+                        .setURL("https://github.com/GamesTwoLife/DiscordBot-Template"),
                 ];
 
                 await interaction.reply({ 
