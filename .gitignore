@@ -11,9 +11,9 @@ package-lock.json
 node_modules/
 jspm_packages/
 
-# TypeScript v1 declaration files
-typings/
-
 # dotenv environment variables file
 .env
 .env.test
+
+#config files
+config.json

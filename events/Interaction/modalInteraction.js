@@ -20,12 +20,12 @@ module.exports = {
         } catch (error) {
             console.log(error);
             if (interaction.deferred || interaction.replied) {
-                await interaction.followUp({ 
+                return interaction.followUp({ 
                     content: `Виникла помилка \`${error.message}\` при виконанні модального вікна ${interaction.customId}`, 
                     ephemeral: true 
                 }).catch(() => {});
             } else {
-                await interaction.reply({ 
+                return interaction.reply({ 
                     content: `Виникла помилка \`${error.message}\` при виконанні модального вікна ${interaction.customId}`, 
                     ephemeral: true 
                 }).catch(() => {});

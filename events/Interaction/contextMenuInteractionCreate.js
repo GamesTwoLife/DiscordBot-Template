@@ -49,18 +49,16 @@ module.exports = {
                         const timeLeft = (expirationTime - now) / 1000;
 
                         if (interaction.deferred || interaction.replied) {
-                            await interaction.followUp({
+                            return interaction.followUp({
                                 content: `Зачекайте **${timeLeft.toFixed(1)}** секунд(и), перед повторним використанням контекстної команди </${interaction.commandName}:${interaction.commandId}>`,
                                 ephemeral: true,
                             }).catch(() => {});
                         } else {
-                            await interaction.reply({
+                            return interaction.reply({
                                 content: `Зачекайте **${timeLeft.toFixed(1)}** секунд(и), перед повторним використанням контекстної команди </${interaction.commandName}:${interaction.commandId}>`,
                                 ephemeral: true,
                             }).catch(() => {});
                         }
-
-                        return;
                     }
                 }
         
@@ -71,16 +69,22 @@ module.exports = {
             } catch (error) {
                 console.log(error);
                 if (interaction.deferred || interaction.replied) {
-                    await interaction.followUp({ content: `Виникла помилка при виконанні контекстної команди "${interaction.commandName}"`, ephemeral: true }).catch(() => {});
+                    return interaction.followUp({ content: `Виникла помилка при виконанні контекстної команди "${interaction.commandName}"`, ephemeral: true }).catch(() => {});
                 } else {
-                    await interaction.reply({ content: `Виникла помилка при виконанні контекстної команди "${interaction.commandName}"`, ephemeral: true }).catch(() => {});
+                    return interaction.reply({ content: `Виникла помилка при виконанні контекстної команди "${interaction.commandName}"`, ephemeral: true }).catch(() => {});
                 }
             }
         } else {
             if (interaction.deferred || interaction.replied) {
-                await interaction.followUp({ content: "Щось дивне відбувається у контекстному меню. Отримано контекстне меню невідомого типу.", ephemeral: true }).catch(() => {});
+                return interaction.followUp({ 
+                    content: "Щось дивне відбувається у контекстному меню. Отримано контекстне меню невідомого типу.", 
+                    ephemeral: true 
+                }).catch(() => {});
             } else {
-                await interaction.reply({ content: "Щось дивне відбувається у контекстному меню. Отримано контекстне меню невідомого типу.", ephemeral: true }).catch(() => {});
+                return interaction.reply({ 
+                    content: "Щось дивне відбувається у контекстному меню. Отримано контекстне меню невідомого типу.", 
+                    ephemeral: true 
+                }).catch(() => {});
             }
         }
     },

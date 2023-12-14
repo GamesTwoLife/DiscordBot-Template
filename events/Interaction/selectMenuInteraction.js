@@ -37,18 +37,16 @@ module.exports = {
                     const timeLeft = (expirationTime - now) / 1000;
 
                     if (interaction.deferred || interaction.replied) {
-                        await interaction.followUp({
+                        return interaction.followUp({
                             content: `Зачекайте **${timeLeft.toFixed(1)}** секунд(и), перед повторним використанням меню ${interaction.customId}`,
                             ephemeral: true,
                         }).catch(() => {});
                     } else {
-                        await interaction.reply({
+                        return interaction.reply({
                             content: `Зачекайте **${timeLeft.toFixed(1)}** секунд(и), перед повторним використанням меню ${interaction.customId}`,
                             ephemeral: true,
                         }).catch(() => {});
                     }
-                    
-                    return;
                 }
             }
 
@@ -59,12 +57,12 @@ module.exports = {
         } catch (error) {
             console.log(error);
             if (interaction.deferred || interaction.replied) {
-                await interaction.followUp({ 
+                return interaction.followUp({ 
                     content: `Виникла помилка \`${error.message}\` при виконанні меню вибору \`${interaction.customId}\``, 
                     ephemeral: true 
                 }).catch(() => {});
             } else {
-                await interaction.reply({ 
+                return interaction.reply({ 
                     content: `Виникла помилка \`${error.message}\` при виконанні меню вибору \`${interaction.customId}\``, 
                     ephemeral: true 
                 }).catch(() => {});
