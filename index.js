@@ -1,4 +1,4 @@
-const { Client, Partials, Collection, ActivityType } = require("discord.js");
+const { Client, Partials, Collection, ActivityType, PermissionsBitField } = require("discord.js");
 const mongoose = require("mongoose");
 const { token, channelId, mongoURL } = require("./config.json");
 const Event = require("./handlers/Event");
@@ -84,7 +84,7 @@ process.on('unhandledRejection', async (error) => {
 	 */
 	const channel = client.channels.cache.get(channelId);
 
-	if (!channel) return console.error(error);
+	if (!channel || !channel.permissionsFor(client.user.id).has([PermissionsBitField.Flags.ManageChannels, PermissionsBitField.Flags.ManageWebhooks])) return console.error(error);
 
 	try {
 		const webhooks = await channel.fetchWebhooks();
@@ -125,7 +125,7 @@ process.on('uncaughtException', async (error) => {
 	 */
 	const channel = client.channels.cache.get(channelId);
 
-	if (!channel) return console.error(error);
+	if (!channel || !channel.permissionsFor(client.user.id).has([PermissionsBitField.Flags.ManageChannels, PermissionsBitField.Flags.ManageWebhooks])) return console.error(error);
 
 	try {
 		const webhooks = await channel.fetchWebhooks();
@@ -166,7 +166,7 @@ process.on('rejectionHandled', async (error) => {
 	 */
 	const channel = client.channels.cache.get(channelId);
 
-	if (!channel) return console.error(error);
+	if (!channel || !channel.permissionsFor(client.user.id).has([PermissionsBitField.Flags.ManageChannels, PermissionsBitField.Flags.ManageWebhooks])) return console.error(error);
 
 	try {
 		const webhooks = await channel.fetchWebhooks();
@@ -207,7 +207,7 @@ process.on('warning', async (warning) => {
 	 */
 	const channel = client.channels.cache.get(channelId);
 
-	if (!channel) return console.error(warning);
+	if (!channel || !channel.permissionsFor(client.user.id).has([PermissionsBitField.Flags.ManageChannels, PermissionsBitField.Flags.ManageWebhooks])) return console.error(warning);
 
 	try {
 		const webhooks = await channel.fetchWebhooks();
