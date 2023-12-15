@@ -18,10 +18,9 @@ module.exports = (client) => {
                 const event = require(eventPath);
     
                 const eventHandler = event.once ? client.once : (restEvents.includes(event.name) ? client.rest.on : client.on);
-                const eventCategory = event.once ? folder : (restEvents.includes(event.name) ? folder : folder);
     
                 eventHandler.call(client, event.name, (...args) => event.execute(...args));
-                console.log(`[EventHandler][${eventCategory}] Подія ${event.name} (${file}) завантажена`);
+                console.log(`[EventHandler][${folder}] Подія ${event.name} (${file}) завантажена`);
             } catch (error) {
                 console.error(`[EventHandler] Помилка завантаження події з файлу ${file}: ${error.message}`);
             }
