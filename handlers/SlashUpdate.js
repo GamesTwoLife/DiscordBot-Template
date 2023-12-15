@@ -6,27 +6,29 @@ const { token, clientId, guildId } = require("./../config.json");
  * @param {import("./../typings").MainClient} client 
  */
 module.exports = async (client) => {
-    const rest = new REST({ version: "10" }).setToken(token);
-
-    const commandsOnlyTestGuildJSONData = client.commands
-        .filter(cmd => cmd.options.devGuildOnly === true)
-        .map(c => c.data.toJSON());
-
-    const commandsJSONData = client.commands
-        .filter(cmd => cmd.options.devGuildOnly === false)
-        .map(c => c.data.toJSON());
-
     try {
+        const rest = new REST({ version: "10" }).setToken(token);
+
+        const commandsOnlyTestGuildJSONData = client.commands
+            .filter(cmd => cmd.options.devGuildOnly === true)
+            .map(c => c.data.toJSON());
+
+        const commandsJSONData = client.commands
+            .filter(cmd => cmd.options.devGuildOnly === false)
+            .map(c => c.data.toJSON());
+
         if (commandsJSONData.length === 0 && commandsOnlyTestGuildJSONData.length > 0) {
             console.log(`Розпочато оновлення ${commandsOnlyTestGuildJSONData.length} серверних команд програми.`);
             const [data_test_guild] = await Promise.all([
-                rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commandsOnlyTestGuildJSONData })
+                rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commandsOnlyTestGuildJSONData }),
+                rest.put(Routes.applicationCommands(clientId), { body: [] })
             ]);
             console.log(`Успішно перезавантажено ${data_test_guild.length} серверних команд програми.`);
         } else if (commandsOnlyTestGuildJSONData.length === 0 && commandsJSONData.length > 0) {
             console.log(`Розпочато оновлення ${commandsJSONData.length} глобальних команд програми.`);
             const [data] = await Promise.all([
-                rest.put(Routes.applicationCommands(clientId), { body: commandsJSONData })
+                rest.put(Routes.applicationCommands(clientId), { body: commandsJSONData }),
+                rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: [] })
             ]);
             console.log(`Успішно перезавантажено ${data.length} глобальних команд програми.`);
         } else {
