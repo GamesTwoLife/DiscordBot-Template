@@ -1,4 +1,4 @@
-const { readdirSync } = require("fs");
+const { readdir } = require("fs/promises");
 const path = require("path");
 
 const restEvents = ["restDebug", "handlerSweep", "hashSweep", "invalidRequestWarning", "rateLimited", "response"];
@@ -6,23 +6,26 @@ const restEvents = ["restDebug", "handlerSweep", "hashSweep", "invalidRequestWar
 /**
  * @param {import("./../typings").MainClient} client 
  */
-module.exports = (client) => {
+module.exports = async (client) => {
     const eventsBasePath = path.join(__dirname, "../events");
     
-    for (const folder of readdirSync(eventsBasePath)) {
+    for (const folder of await readdir(eventsBasePath)) {
         const folderPath = `${eventsBasePath}/${folder}`;
 
-        for (const file of readdirSync(folderPath)) {
+        for (const file of await readdir(folderPath)) {
             try {
                 const eventPath = path.join(folderPath, file);
                 const event = require(eventPath);
-    
-                const eventHandler = event.once ? client.once : (restEvents.includes(event.name) ? client.rest.on : client.on);
 
-                eventHandler(event.name, (...args) => event.execute(...args));
-                console.log(`[EventHandler][${folder}] Подія ${event.name} (${file}) завантажена`);
+                if (event.once) {
+                    client.once(event.name, (...args) => event.execute(...args))
+                } else if (restEvents.includes(event.name)) {
+                    client.rest.on(event.name, (...args) => event.execute(...args))
+                } else {
+                    client.on(event.name, (...args) => event.execute(...args))
+                }
             } catch (error) {
-                console.error(`[EventHandler] Помилка завантаження події з файлу ${file}: ${error.message}`);
+                console.error(`[EventHandler] Error loading an event from a file ${file}: ${error.message}`);
             }
         }
     }
