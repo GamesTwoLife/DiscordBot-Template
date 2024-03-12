@@ -7,9 +7,8 @@ const { t } = require("i18next");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("ping")
-        .setDescription(t('commands:info.ping.description', { lng: "en-US" }))
+        .setDescription(t('commands:info.ping.description', { lng: "en" }))
         .setDescriptionLocalizations({
-            'en-GB': t('commands:info.ping.description', { lng: "en-GB" }),
             uk: t('commands:info.ping.description', { lng: "uk" }),
             ru: t('commands:info.ping.description', { lng: "ru" })
         })
