@@ -5,25 +5,22 @@ module.exports = async () => {
     mongoose.Promise = Promise;
     mongoose.connect(mongoURL);
     
-    // Обробка помилок підключення
+    // Handling connection errors
     mongoose.connection.on('error', (error) => {
-        console.error(`Помилка підключення до MongoDB: ${error.message}`);
+        console.error(`Error connecting to MongoDB: ${error.message}`);
     });
     
-    // Обробка відключення
+    // Disconnection handling
     mongoose.connection.on('disconnected', () => {
-        console.log('MongoDB відключено. Спроба перепідключення...');
-    
-        // Спроба перепідключення
-        mongoose.connect(mongoURL);
+        console.log('MongoDB has been disabled.');
     });
     
-    // Обробка успішного підключення
+    // Handling a successful connection
     mongoose.connection.on('connected', () => {
-        console.log(`MongoDB успішно підключено до кластеру ${mongoose.connection.name}`);
+        console.log(`MongoDB successfully connected to the cluster ${mongoose.connection.name}`);
     });
     
-    // Обробка закриття
+    // Closing processing
     process.on('SIGINT', async () => {
         await mongoose.connection.close();
         process.exit(0);

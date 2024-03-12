@@ -13,7 +13,7 @@ const UserDB = require("./db/users");
 
 /**
  * @type {import("./typings").MainClient}
- * @description Основний клієнт програми
+ * @description The main client of the program
  */
 const client = new Client({ 
 	allowedMentions: { parse: [ "roles", "users", "everyone" ] }, 
@@ -48,7 +48,7 @@ client.dbuser = UserDB;
 
 Mongo();
 
-// Анти-аварія
+// Anti-crash
 process.on('unhandledRejection', async (error) => {
 	/**
 	 * @type {import("discord.js").TextChannel}
@@ -87,7 +87,7 @@ process.on('unhandledRejection', async (error) => {
 		}).catch(() => {});
 	} catch (err) {
 		console.error(error);
-		console.error('Помилка при спробі надіслати повідомлення: ', err);
+		console.error('Error trying to send a message: ', err);
 	}
 });
 process.on('uncaughtException', async (error) => {
@@ -128,7 +128,7 @@ process.on('uncaughtException', async (error) => {
 		}).catch(() => {});
 	} catch (err) {
 		console.error(error);
-		console.error('Помилка при спробі надіслати повідомлення: ', err);
+		console.error('Error trying to send a message: ', err);
 	}
 });
 process.on('rejectionHandled', async (error) => {
@@ -169,7 +169,7 @@ process.on('rejectionHandled', async (error) => {
 		}).catch(() => {});
 	} catch (err) {
 		console.error(error);
-		console.error('Помилка при спробі надіслати повідомлення: ', err);
+		console.error('Error trying to send a message: ', err);
 	}
 });
 process.on('warning', async (warning) => {
@@ -210,7 +210,7 @@ process.on('warning', async (warning) => {
 		}).catch(() => {});
 	} catch (err) {
 		console.error(warning);
-		console.error('Помилка при спробі надіслати повідомлення: ', err);
+		console.error('Error trying to send a message: ', err);
 	}
 });
 
