@@ -1,4 +1,5 @@
-const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, EmbedBuilder } = require("discord.js");
+const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, EmbedBuilder, UserSelectMenuBuilder, ChannelSelectMenuBuilder, MentionableSelectMenuBuilder, RoleSelectMenuBuilder } = require("discord.js");
+const { t } = require("i18next");
 const buttonPagination = require("../../utils/buttonPagination");
 const buttonWrapper = require("../../utils/buttonWrapper");
 
@@ -8,15 +9,27 @@ const buttonWrapper = require("../../utils/buttonWrapper");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("sample")
-        .setDescription("Sample Autocomplete/Button/Menu/Modal.")
+        .setDescription(t('commands:sample.sample.description', { lng: "en" }))
+        .setDescriptionLocalizations({
+            uk: t('commands:sample.sample.description', { lng: "uk" }),
+            ru: t('commands:sample.sample.description', { lng: "ru" })
+        })
         .addSubcommand(subcommand =>
             subcommand
                 .setName("autocomplete")
-                .setDescription("Sample Autocomplete")
+                .setDescription(t('commands:sample.sample.autocomplete.description', { lng: "en" }))
+                .setDescriptionLocalizations({
+                    uk: t('commands:sample.sample.autocomplete.description', { lng: "uk" }),
+                    ru: t('commands:sample.sample.autocomplete.description', { lng: "ru" })
+                })
                 .addStringOption(option =>
                     option
                         .setName("input")
-                        .setDescription("Input")
+                        .setDescription(t('commands:sample.sample.autocomplete.options.input', { lng: "en" }))
+                        .setDescriptionLocalizations({
+                            uk: t('commands:sample.sample.autocomplete.options.input', { lng: "uk" }),
+                            ru: t('commands:sample.sample.autocomplete.options.input', { lng: "ru" })
+                        })
                         .setAutocomplete(true)
                         .setRequired(true)
                 )
@@ -24,33 +37,54 @@ module.exports = {
         .addSubcommand(subcommand =>
             subcommand
                 .setName("button")
-                .setDescription("Sample Button")
+                .setDescription(t('commands:sample.sample.button.description', { lng: "en" }))
+                .setDescriptionLocalizations({
+                    uk: t('commands:sample.sample.button.description', { lng: "uk" }),
+                    ru: t('commands:sample.sample.button.description', { lng: "ru" })
+                })
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName("menu")
                 .setDescription("Sample Menu")
+                .setDescription(t('commands:sample.sample.menu.description', { lng: "en" }))
+                .setDescriptionLocalizations({
+                    uk: t('commands:sample.sample.menu.description', { lng: "uk" }),
+                    ru: t('commands:sample.sample.menu.description', { lng: "ru" })
+                })
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName("modal")
-                .setDescription("Sample Modal")
+                .setDescription(t('commands:sample.sample.modal.description', { lng: "en" }))
+                .setDescriptionLocalizations({
+                    uk: t('commands:sample.sample.modal.description', { lng: "uk" }),
+                    ru: t('commands:sample.sample.modal.description', { lng: "ru" })
+                })
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName("pagination")
-                .setDescription("Sample Pagination")
+                .setDescription(t('commands:sample.sample.pagination.description', { lng: "en" }))
+                .setDescriptionLocalizations({
+                    uk: t('commands:sample.sample.pagination.description', { lng: "uk" }),
+                    ru: t('commands:sample.sample.pagination.description', { lng: "ru" })
+                })
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName("buttonwrapper")
-                .setDescription("Sample Button Wrapper")
+                .setDescription(t('commands:sample.sample.buttonwrapper.description', { lng: "en" }))
+                .setDescriptionLocalizations({
+                    uk: t('commands:sample.sample.buttonwrapper.description', { lng: "uk" }),
+                    ru: t('commands:sample.sample.buttonwrapper.description', { lng: "ru" })
+                })
         )
         .setDMPermission(false),
     options: {
+        cooldown: 10,
         ownerOnly: false,
         devGuildOnly: true,
-        cooldown: 0,
         bot_permissions: ["ViewChannel", "SendMessages"],
     },
 
@@ -74,8 +108,7 @@ module.exports = {
                         .setLabel("sample button")
                 );
 
-                await interaction.reply({ 
-                    content: "Кнопка",
+                await interaction.reply({
                     components: [row]
                 });
             } break;
@@ -83,18 +116,37 @@ module.exports = {
             case "menu": {
                 const row = new ActionRowBuilder().addComponents(
                     new StringSelectMenuBuilder()
-                        .setCustomId("sample")
+                        .setCustomId("string_sample")
                         .setOptions(
                             {
                                 label: "sample option",
                                 value: "sample_option"
+                            },
+                            {
+                                label: "sample option_two",
+                                value: "sample_option_two"
                             }
                         )
                 );
 
-                await interaction.reply({ 
-                    content: "Меню",
-                    components: [row]
+                const row2 = new ActionRowBuilder().addComponents(
+                    new UserSelectMenuBuilder().setCustomId("user_sample")
+                );
+
+                const row3 = new ActionRowBuilder().addComponents(
+                    new MentionableSelectMenuBuilder().setCustomId("mentionable_sample")
+                );
+
+                const row4 = new ActionRowBuilder().addComponents(
+                    new ChannelSelectMenuBuilder().setCustomId("channel_sample")
+                );
+
+                const row5 = new ActionRowBuilder().addComponents(
+                    new RoleSelectMenuBuilder().setCustomId("role_sample")
+                );
+
+                await interaction.reply({
+                    components: [row, row2, row3, row4, row5]
                 });
             } break;
 
@@ -117,17 +169,10 @@ module.exports = {
             } break;
 
             case "pagination": {
-                let pageStrings = [
-                    "Котики найкращі :)", 
-                    "Песики найкращі :)", 
-                    "Україна понад усе!", 
-                    "Слава Україні! Героям Слава!", 
-                    "Крутий шаблон бота"
-                ];
                 let embeds = [];
 
-                for (let i = 0; i < 4; i++) {
-                    embeds.push(new EmbedBuilder().setColor(0x2b2d31).setDescription(`${pageStrings[i]}`));
+                for (let i = 0; i < 5; i++) {
+                    embeds.push(new EmbedBuilder().setColor(0x2b2d31).setDescription(`${t(`commands:sample.sample.pagination.pageStrings.${[i]}`, { lng: interaction.locale })}`));
                 }
 
                 await buttonPagination(interaction, embeds);
@@ -138,15 +183,15 @@ module.exports = {
                     new ButtonBuilder()
                         .setCustomId("say_hello")
                         .setStyle(ButtonStyle.Secondary)
-                        .setLabel("Натисни на мене"),
+                        .setLabel(t('commands:sample.sample.buttonwrapper.say_hello', { lng: interaction.locale })),
                     new ButtonBuilder()
-                        .setLabel("Найкращий шаблон Discord бота")
+                        .setLabel(t('commands:sample.sample.buttonwrapper.cool_template', { lng: interaction.locale }))
                         .setStyle(ButtonStyle.Link)
                         .setURL("https://github.com/GamesTwoLife/DiscordBot-Template"),
                 ];
 
                 await interaction.reply({ 
-                    content: "Натискайте на кнопки знизу:",
+                    content: t('commands:sample.sample.buttonwrapper.content', { lng: interaction.locale }),
                     components: buttonWrapper(buttons)
                 });
             } break;

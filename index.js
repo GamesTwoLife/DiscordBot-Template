@@ -8,6 +8,9 @@ const SlashUpdate = require("./handlers/SlashUpdate");
 const GuildDB = require("./db/guilds");
 const UserDB = require("./db/users");
 
+const i18next = require("i18next");
+const resources = require("./locales/resources");
+
 /**
  * @type {import("./typings").MainClient}
  * @description The main client of the program
@@ -33,6 +36,19 @@ const client = new Client({
 			state: "by GamesTwoLife",
 			type: ActivityType.Custom,
 		}]
+	}
+});
+
+client.i18n = i18next.init({
+	fallbackLng: 'en',
+	defaultNS: 'common',
+	interpolation: {
+		escapeValue: false,
+	},
+	resources: {
+		en: resources.en,
+		uk: resources.uk,
+		ru: resources.ru
 	}
 });
 

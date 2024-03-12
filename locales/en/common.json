@@ -1,0 +1,15 @@
+{
+    "events": {
+        "Interaction": {
+            "no_command": "{{member}}, the command does not exist or something strange happened",
+            "only_developer": "{{member}}, this interaction is for bot developers only",
+            "missing_permissions": "{{member}}, I need the following permissions to perform this interaction: {{permissions}}",
+            "cooldown_command": "{{member}}, The `{{commandName}}` command usage limit has been reached, try again <t:{{expiredTimestamp}}:R>",
+            "cooldown_button": "{{member}}, The `{{buttonId}}` button usage limit has been reached, try again <t:{{expiredTimestamp}}:R>",
+            "cooldown_menu": "{{member}}, The `{{menuId}}` menu has reached its usage limit, try again <t:{{expiredTimestamp}}:R>",
+            "cooldown_modal": "{{member}}, Modal submit `{{modalId}}` has reached its usage limit, try again <t:{{expiredTimestamp}}:R>",
+            "error_occured": "{{member}}, My friend, it looks like there was an unforeseen error, we have already tracked it down and will fix it soon",
+            "something_strange": "{{member}}, Something strange is happening in the context menu. A context menu of unknown type has been received."
+        }
+    }
+}

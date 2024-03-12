@@ -1,0 +1,53 @@
+{
+    "info": {
+        "ping": {
+            "description": "Bot ping and latency",
+            "content": "Discord Websocket Ping **{{ping}}**ms\nAnswer to commands: **{{latency}}**ms"
+        }
+    },
+    "sample": {
+        "message_sample": {
+            "description": "message sample",
+            "content": "This is the response to the message context menu command \nMessage ID: {{id}}\nMessage content: {{message}}"
+        },
+        "sample": {
+            "description": "Sample Autocomplete/Button/Menu/ModalSubmit.",
+            "autocomplete": {
+                "description": "Sample Autocomplete.",
+                "options": {
+                    "input": "Input"
+                }
+            },
+            "button": {
+                "description": "Sample Button."
+            },
+            "menu": {
+                "description": "Sample Menu."
+            },
+            "modal": {
+                "description": "Sample modal submit."
+            },
+            "pagination": {
+                "description": "Sample Pagination.",
+                "pageStrings": [
+                    "Cats are the best :)", 
+                    "Dogs are the best :)", 
+                    "Ukraine is above all!" ,
+                    "Glory to Ukraine! Glory to the Heroes!" ,
+                    "Cool bot template"
+                ],
+                "footer": "Page {{currentPage}}/{{totalPages}}"
+            },
+            "buttonwrapper": {
+                "description": "Sample Button Wrapper.",
+                "content": "Click on the buttons below:",
+                "say_hello": "Click me",
+                "cool_template": "The best Discord bot template"
+            }
+        },
+        "user_sample": {
+            "description": "user sample",
+            "content": "This is the response to the user context menu command\nUser ID: {{id}}\nMember/User: {{member}} / {{user}}"
+        }
+    }
+}

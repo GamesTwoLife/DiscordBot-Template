@@ -1,13 +1,16 @@
 /**
- * @type {import("../../../typings").AutocompleteInteraction}
+ * @type {import("../../../typings").Autocomplete}
  */
 module.exports = {
     name: "sample",
+	type: "autocomplete",
 
     async execute(interaction) {
+		if (!interaction.isAutocomplete()) return;
+		
         const { options } = interaction;
 
-		const choices = ['Популярні теми: Потоки', 'Шардинг: Початок роботи', 'Бібліотека: Голосові з’єднання', 'Взаємодії: Відповідь на (/) команди', 'Популярні теми: Попередній перегляд для вставлення'];
+		const choices = ['Popular Topics: Threads', 'Sharding: Getting started', 'Library: Voice Connections', 'Interactions: Replying to slash commands', 'Popular Topics: Embed preview'];
 
 		const focusedValue = options.getFocused();
 		if (focusedValue.length === 0) {
@@ -18,7 +21,7 @@ module.exports = {
 
 		const filtered = choices.filter(choice => choice.startsWith(focusedValue));
 
-		await interaction.respond(
+		return interaction.respond(
 			filtered.map(choice => ({ name: choice, value: choice })),
 		);
     },

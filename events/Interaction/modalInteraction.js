@@ -1,4 +1,6 @@
-const { Events } = require("discord.js")
+const { Events, Collection } = require("discord.js");
+const { developers } = require("../../config.json");
+const { t } = require("i18next");
 
 module.exports = {
     name: Events.InteractionCreate,
@@ -7,28 +9,81 @@ module.exports = {
      * @param {import('discord.js').ModalSubmitInteraction & { client: import('../../typings').MainClient }} interaction 
      */
     async execute(interaction) {
-        const { client } = interaction;
+        const { client, guild, user } = interaction;
 
         if (!interaction.isModalSubmit()) return;
 
         try {
-            const modal = client.modals.get(interaction.customId);
+            const modals = client.components.get(interaction.customId)?.filter(component => component.type === "modalSubmit");
 
-            if (!modal) return;
+            if (!modals) return;
 
-            await modal.execute(interaction);
+            for (const modal of modals) {
+                if (modal.options && modal.options?.ownerOnly && !developers.includes(user.id)) {
+                    return interaction.reply({ content: t('common:events.Interaction.no_command', { lng: interaction.locale, member: user.toString() }), ephemeral: true });
+                }
+    
+                if (modal.options && modal.options?.bot_permissions && !guild.members.me.permissions.has(modal.options?.bot_permissions)) {
+                    const permsBot = modal.options?.bot_permissions?.map(x => x).join(', ');
+    
+                    return interaction.reply({ content: t('common:events.Interaction.missing_permissions', { lng: interaction.locale, member: user.toString(), permissions: permsBot }), ephemeral: true });
+                }
+    
+                const { cooldowns } = client;
+    
+                if (!cooldowns.has(interaction.customId)) {
+                    cooldowns.set(interaction.customId, new Collection());
+                }
+    
+                const now = Date.now();
+                const timestamps = cooldowns.get(interaction.customId);
+                const cooldownAmount = (modal.options?.cooldown ?? 5) * 1000;
+    
+                if (timestamps.has(user.id)) {
+                    const expirationTime = timestamps.get(user.id) + cooldownAmount;
+    
+                    if (now < expirationTime) {
+                        const expiredTimestamp = Math.round(expirationTime / 1000);
+    
+                        if (interaction.deferred) {
+                            return interaction.editReply({
+                                content: t('common:events.Interaction.cooldown_modal', { lng: interaction.locale, member: user.toString(), modalId: interaction.customId, expiredTimestamp }),
+                            });
+                        } else if (interaction.replied) {
+                            return interaction.followUp({
+                                content: t('common:events.Interaction.cooldown_modal', { lng: interaction.locale, member: user.toString(), modalId: interaction.customId, expiredTimestamp }),
+                                ephemeral: true
+                            });
+                        } else {
+                            return interaction.reply({
+                                content: t('common:events.Interaction.cooldown_modal', { lng: interaction.locale, member: user.toString(), modalId: interaction.customId, expiredTimestamp }),
+                                ephemeral: true
+                            });
+                        }
+                    }
+                }
+    
+                timestamps.set(user.id, now);
+                setTimeout(() => timestamps.delete(user.id), cooldownAmount);
+    
+                return modal.execute(interaction);
+            }
         } catch (error) {
             console.log(error);
-            if (interaction.deferred || interaction.replied) {
-                return interaction.followUp({ 
-                    content: `Виникла помилка \`${error.message}\` при виконанні модального вікна ${interaction.customId}`, 
-                    ephemeral: true 
-                }).catch(() => {});
-            } else {
+            if (interaction.deferred) {
+                return interaction.editReply({ 
+					content: t('common:events.Interaction.error_occured', { lng: interaction.locale, member: user.toString() })
+				});
+            } else if (interaction.replied) {
+				return interaction.followUp({
+					content: t('common:events.Interaction.error_occured', { lng: interaction.locale, member: user.toString() }),
+					ephemeral: true
+				});
+			} else {
                 return interaction.reply({ 
-                    content: `Виникла помилка \`${error.message}\` при виконанні модального вікна ${interaction.customId}`, 
-                    ephemeral: true 
-                }).catch(() => {});
+					content: t('common:events.Interaction.error_occured', { lng: interaction.locale, member: user.toString() }), 
+					ephemeral: true 
+				});
             }
         }
     },

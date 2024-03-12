@@ -1,4 +1,5 @@
-const { Events } = require("discord.js")
+const { Events, Collection } = require("discord.js");
+const { developers } = require("../../config.json");
 
 module.exports = {
     name: Events.InteractionCreate,
@@ -7,19 +8,25 @@ module.exports = {
      * @param {import('discord.js').AutocompleteInteraction & { client: import('../../typings').MainClient }} interaction
      */
     async execute(interaction) {
-        const { client } = interaction;
+        const { client, guild, user } = interaction;
 
         if (!interaction.isAutocomplete()) return;
 
         try {
-            const autocomplete = client.autocompletes.get(interaction.commandName);
+            const autocompletes = client.components.get(interaction.commandName)?.filter(component => component.type === "autocomplete");
 
-            if (!autocomplete) return interaction.respond([]).catch(() => {});
+            if (!autocompletes) return interaction.respond([]);
 
-            await autocomplete.execute(interaction);
+            for (const autocomplete of autocompletes) {
+                if (autocomplete.options && autocomplete.options?.ownerOnly && !developers.includes(user.id)) {
+                    return interaction.respond([]);
+                }
+    
+                return autocomplete.execute(interaction);
+            }
         } catch (error) {
             console.log(error);
-            return interaction.respond([]).catch(() => {});
+            return interaction.respond([]);
         }
     },
 };

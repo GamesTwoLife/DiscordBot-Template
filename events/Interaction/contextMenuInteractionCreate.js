@@ -1,4 +1,6 @@
-const { Events, Collection } = require("discord.js")
+const { Events, Collection } = require("discord.js");
+const { developers } = require("../../config.json");
+const { t } = require("i18next");
 
 module.exports = {
     name: Events.InteractionCreate,
@@ -16,20 +18,17 @@ module.exports = {
                 const command = client.commands.get(interaction.commandName);
 
                 if (!command) {
-                    return interaction.reply({ content: "Нажаль, такої контекстної команди не існує!", ephemeral: true }).catch(() => {});
+                    return interaction.reply({ content: t('common:events.Interaction.no_command', { lng: interaction.locale, member: user.toString() }), ephemeral: true });
                 }
-
+    
                 if (command.options && command.options?.ownerOnly && !developers.includes(user.id)) {
-                    return interaction.reply({ content: "Ця контекстна команда лише для розробників бота!", ephemeral: true }).catch(() => {});
+                    return interaction.reply({ content: t('common:events.Interaction.only_developer', { lng: interaction.locale, member: user.toString() }), ephemeral: true });
                 }
-
+    
                 if (command.options && command.options?.bot_permissions && !guild.members.me.permissions.has(command.options?.bot_permissions)) {
                     const permsBot = command.options?.bot_permissions?.map(x => x).join(', ');
-        
-                    return interaction.reply({ 
-                        content: `Мені не вистачає таких дозволів: ${permsBot}. Для виконання контекстної команди "${interaction.commandName}"`, 
-                        ephemeral: true 
-                    }).catch(() => {});
+    
+                    return interaction.reply({ content: t('common:events.Interaction.missing_permissions', { lng: interaction.locale, member: user.toString(), permissions: permsBot }), ephemeral: true });
                 }
 
                 const { cooldowns } = client;
@@ -40,24 +39,28 @@ module.exports = {
         
                 const now = Date.now();
                 const timestamps = cooldowns.get(interaction.commandName);
-                const cooldownAmount = (command.options?.cooldown || 0) * 1000;
+                const cooldownAmount = (command.options?.cooldown ?? 5) * 1000;
         
                 if (timestamps.has(user.id)) {
                     const expirationTime = timestamps.get(user.id) + cooldownAmount;
         
                     if (now < expirationTime) {
-                        const timeLeft = (expirationTime - now) / 1000;
+                        const expiredTimestamp = Math.round(expirationTime / 1000);
 
-                        if (interaction.deferred || interaction.replied) {
+                        if (interaction.deferred) {
+                            return interaction.editReply({
+                                content: t('common:events.Interaction.cooldown_command', { lng: interaction.locale, member: user.toString(), commandName: interaction.commandName, expiredTimestamp }),
+                            });
+                        } else if (interaction.replied) {
                             return interaction.followUp({
-                                content: `Зачекайте **${timeLeft.toFixed(1)}** секунд(и), перед повторним використанням контекстної команди </${interaction.commandName}:${interaction.commandId}>`,
-                                ephemeral: true,
-                            }).catch(() => {});
+                                content: t('common:events.Interaction.cooldown_command', { lng: interaction.locale, member: user.toString(), commandName: interaction.commandName, expiredTimestamp }),
+                                ephemeral: true
+                            });
                         } else {
                             return interaction.reply({
-                                content: `Зачекайте **${timeLeft.toFixed(1)}** секунд(и), перед повторним використанням контекстної команди </${interaction.commandName}:${interaction.commandId}>`,
-                                ephemeral: true,
-                            }).catch(() => {});
+                                content: t('common:events.Interaction.cooldown_command', { lng: interaction.locale, member: user.toString(), commandName: interaction.commandName, expiredTimestamp }),
+                                ephemeral: true
+                            });
                         }
                     }
                 }
@@ -68,23 +71,38 @@ module.exports = {
                 await command.execute(interaction);
             } catch (error) {
                 console.log(error);
-                if (interaction.deferred || interaction.replied) {
-                    return interaction.followUp({ content: `Виникла помилка при виконанні контекстної команди "${interaction.commandName}"`, ephemeral: true }).catch(() => {});
+                if (interaction.deferred) {
+                    return interaction.editReply({ 
+                        content: t('common:events.Interaction.error_occured', { lng: interaction.locale, member: user.toString() }), 
+                        ephemeral: true 
+                    });
+                } else if (interaction.replied) {
+                    return interaction.followUp({
+                        content: t('common:events.Interaction.error_occured', { lng: interaction.locale, member: user.toString() }),
+                        ephemeral: true
+                    });
                 } else {
-                    return interaction.reply({ content: `Виникла помилка при виконанні контекстної команди "${interaction.commandName}"`, ephemeral: true }).catch(() => {});
+                    return interaction.reply({ 
+                        content: t('common:events.Interaction.error_occured', { lng: interaction.locale, member: user.toString() }), 
+                        ephemeral: true 
+                    });
                 }
             }
         } else {
-            if (interaction.deferred || interaction.replied) {
-                return interaction.followUp({ 
-                    content: "Щось дивне відбувається у контекстному меню. Отримано контекстне меню невідомого типу.", 
-                    ephemeral: true 
-                }).catch(() => {});
-            } else {
+            if (interaction.deferred) {
+                return interaction.editReply({ 
+					content: t('common:events.Interaction.something_strange', { lng: interaction.locale, member: user.toString() })
+				});
+            } else if (interaction.replied) {
+				return interaction.followUp({
+					content: t('common:events.Interaction.something_strange', { lng: interaction.locale, member: user.toString() }),
+					ephemeral: true
+				});
+			} else {
                 return interaction.reply({ 
-                    content: "Щось дивне відбувається у контекстному меню. Отримано контекстне меню невідомого типу.", 
-                    ephemeral: true 
-                }).catch(() => {});
+					content: t('common:events.Interaction.something_strange', { lng: interaction.locale, member: user.toString() }), 
+					ephemeral: true 
+				});
             }
         }
     },

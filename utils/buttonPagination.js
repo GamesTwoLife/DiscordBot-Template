@@ -1,4 +1,5 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilder } = require("discord.js");
+const { t } = require("i18next");
 
 /**
  * 
@@ -10,8 +11,8 @@ const { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilde
  */
 module.exports = async (interaction, pages, time = 30 * 1000, emojis = ["⏪", "🏠", "⏩"]) => {
     try {
-        if (!interaction || !pages || pages.length === 0) throw new Error("Неправильні аргументи");
-        if (emojis.length < 3 || emojis.length > 3) throw new Error("Вказано менше або більше 3 емодзі в масиві");
+        if (!interaction || !pages || pages.length === 0) throw new Error("Wrong arguments");
+        if (emojis.length < 3 || emojis.length > 3) throw new Error("Less than or more than 3 emojis in the array are specified");
 
         await interaction.deferReply();
     
@@ -42,9 +43,9 @@ module.exports = async (interaction, pages, time = 30 * 1000, emojis = ["⏪", "
         
         const buttons = new ActionRowBuilder().addComponents([prev, home, next]);
         let index = 0;
-    
+        
         const msg = await interaction.editReply({
-            embeds: [pages[index].setFooter({ text: `Сторінка ${index + 1}/${pages.length}`  })],
+            embeds: [pages[index].setFooter({ text: t('commands:sample.sample.pagination.footer', { lng: interaction.locale, currentPage: index + 1, totalPages: pages.length })  })],
             components: [buttons],
             fetchReply: true
         });
@@ -82,7 +83,7 @@ module.exports = async (interaction, pages, time = 30 * 1000, emojis = ["⏪", "
             }
         
             await msg.edit({
-                embeds: [pages[index].setFooter({ text: `Сторінка ${index + 1}/${pages.length}`  })],
+                embeds: [pages[index].setFooter({ text: t('commands:sample.sample.pagination.footer', { lng: interaction.locale, currentPage: index + 1, totalPages: pages.length })  })],
                 components: [buttons]
             });
         
@@ -106,14 +107,18 @@ module.exports = async (interaction, pages, time = 30 * 1000, emojis = ["⏪", "
         return msg;
     } catch(err) {
         console.log(err);
-        if (interaction.deferred || interaction.replied) {
-            await interaction.followUp({
-                content: `Виникла помилка: ${err.message}`,
+        if (interaction.deferred) {
+            return interaction.editReply({
+                content: `${err.message}`
+            });
+        } else if (interaction.replied) {
+            return interaction.followUp({
+                content: `${err.message}`,
                 ephemeral: true
             });
-        } else {
-            await interaction.reply({
-                content: `Виникла помилка: ${err.message}`,
+        }else {
+            return interaction.reply({
+                content: `${err.message}`,
                 ephemeral: true
             });
         }
