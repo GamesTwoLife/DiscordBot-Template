@@ -41,14 +41,10 @@ const client = new Client({
 
 client.commands = new Collection();
 client.cooldowns = new Collection();
+client.components = new Collection();
 
 client.dbguild = GuildDB;
 client.dbuser = UserDB;
-
-client.buttons = new Collection();
-client.selectMenus = new Collection();
-client.modals = new Collection();
-client.autocompletes = new Collection();
 
 Mongo();
 
