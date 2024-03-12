@@ -9,7 +9,7 @@ module.exports = {
     async execute(member) {
         const { client, guild } = member;
 
-        const user = await client.dbuser.getUserById(guild.id, member.id);
+        const user = await client.dbuser.getUser(guild.id, member.id);
 
         if (!user) await client.dbuser.createUser({ guildID: guild.id, userID: member.id });
     },
