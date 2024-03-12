@@ -1,6 +1,6 @@
 {
   "name": "discordbot-template",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Шаблон для створення власного бота на основі discord-js!",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,18 @@
     "url": "git+https://github.com/GamesTwoLife/DiscordBot-Template.git"
   },
   "keywords": [
-    "discord-js"
+    "mongodb",
+    "mongoose",
+    "discord",
+    "discordjs",
+    "discord-bot",
+    "discord-js",
+    "discord-bot-template",
+    "bot-template",
+    "discord-handler",
+    "discordjs-v14",
+    "discord-js-handler-v14",
+    "discord-v14"
   ],
   "author": {
     "name": "GamesTwoLife",
@@ -26,6 +37,7 @@
   "dependencies": {
     "discord.js": "^14.14.1",
     "fs": "^0.0.1-security",
+    "i18next": "^23.10.0",
     "mongoose": "^7.0.2",
     "ms": "^2.1.3"
   }
