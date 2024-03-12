@@ -7,10 +7,10 @@ const UserSchema = new mongoose.Schema({
 
 const UserModel = mongoose.model('User', UserSchema);
 
-const getUserById = (guildID, userID) => UserModel.findOne({ guildID, userID });
+const getUser = (guildID, userID) => UserModel.findOne({ guildID, userID });
 
 const createUser = (values) => new UserModel(values).save().then((user) => user.toObject());
-const deleteUserById = (guildID, userID) => UserModel.findOneAndDelete({ guildID, userID });
-const updateUserById = (guildID, userID, values) => UserModel.findOneAndUpdate(guildID, userID, values);
+const deleteUser = (guildID, userID) => UserModel.findOneAndDelete({ guildID, userID });
+const updateUser = (guildID, userID, values) => UserModel.findOneAndUpdate({ guildID, userID }, values);
 
-module.exports = { UserModel, getUserById, createUser, deleteUserById, updateUserById };
+module.exports = { UserModel, getUser, createUser, deleteUser, updateUser };

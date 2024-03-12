@@ -6,10 +6,10 @@ const GuildSchema = new mongoose.Schema({
 
 const GuildModel = mongoose.model('Guild', GuildSchema);
 
-const getGuildById = (guildID) => GuildModel.findOne({ guildID });
+const getGuild = (guildID) => GuildModel.findOne({ guildID });
 
 const createGuild = (values) => new GuildModel(values).save().then((guild) => guild.toObject());
-const deleteGuildById = (guildID) => GuildModel.findOneAndDelete({ guildID });
-const updateGuildById = (guildID, values) => GuildModel.findOneAndUpdate(guildID, values);
+const deleteGuild = (guildID) => GuildModel.findOneAndDelete({ guildID });
+const updateGuild = (guildID, values) => GuildModel.findOneAndUpdate({ guildID }, values);
 
-module.exports = { GuildModel, getGuildById, createGuild, deleteGuildById, updateGuildById };
+module.exports = { GuildModel, getGuild, createGuild, deleteGuild, updateGuild };
