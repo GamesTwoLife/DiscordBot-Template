@@ -3,11 +3,8 @@ const { token, channelId } = require("./config.json");
 const Mongo = require("./handlers/Mongo");
 const Event = require("./handlers/Event");
 const Command = require("./handlers/Command");
+const Component = require("./handlers/Component");
 const SlashUpdate = require("./handlers/SlashUpdate");
-const Button = require("./handlers/components/Button");
-const Autocomplete = require("./handlers/components/Autocomplete");
-const SelectMenu = require("./handlers/components/SelectMenu");
-const Modal = require("./handlers/components/Modal");
 const GuildDB = require("./db/guilds");
 const UserDB = require("./db/users");
 
@@ -202,12 +199,11 @@ process.on('warning', async (warning) => {
 	}
 });
 
-client.login(token).then(() => {
-    Event(client);
-    Command(client);
-    Button(client);
-    Autocomplete(client);
-    SelectMenu(client);
-    Modal(client);
-    SlashUpdate(client);
-});
+(async () => {
+	await Event(client);
+    await Command(client);
+	await Component(client);
+    await SlashUpdate(client);
+})()
+
+client.login(token);
