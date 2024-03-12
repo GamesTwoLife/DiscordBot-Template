@@ -1,23 +1,24 @@
 import * as Discord from "discord.js";
+declare type i18next = typeof import("i18next");
 declare type GuildDB = typeof import("./db/guilds");
 declare type UserDB = typeof import("./db/users");
 
+export type ComponentType = "button" | "selectmenu" | "autocomplete" | "modalSubmit"
+
 /**
- * Модифікований вбудований клієнт із підтримкою обробників команд/подій.
+ * @description Modified built-in client with support for command/event handlers.
  */
 export interface MainClient extends Discord.Client {
     commands: Discord.Collection<string, Command>;
     cooldowns: Discord.Collection<string, Discord.Collection<string, number>>;
-    buttons: Discord.Collection<string, ButtonInteraction>;
-    selectMenus: Discord.Collection<string, SelectMenuInteraction>;
-    modals: Discord.Collection<string, ModalInteraction>;
-    autocompletes: Discord.Collection<string, AutocompleteInteraction>;
+    components: Discord.Collection<string, [Component]>;
     dbguild: GuildDB;
     dbuser: UserDB;
+    i18n: i18next;
 };
 
 /**
- * Представляє команду програми.
+ * @description Represents the program command.
  */
 export interface Command {
     data: Discord.SlashCommandBuilder | Discord.ContextMenuCommandBuilder;
@@ -32,45 +33,80 @@ export interface Command {
 };
 
 /**
- * Представляє кнопки програми.
+ * @description Represents a component of the program.
  */
-export interface ButtonInteraction {
-    id: string;
-    options: {
-        cooldown?: number,
-        ownerOnly?: boolean
-    };
-
-    execute(interaction: Discord.ButtonInteraction & { client: MainClient }): void | Promise<void>;
-};
-
-/**
- * Представляє меню вибору програми.
- */
-export interface SelectMenuInteraction {
-    id: string;
-    options: {
-        cooldown?: number,
-        ownerOnly?: boolean
-    };
-
-    execute(interaction: Discord.AnySelectMenuInteraction & { client: MainClient }): void | Promise<void>;
-};
-
-/**
- * Представляє модальні вікна програми.
- */
-export interface ModalInteraction {
-    id: string;
-
-    execute(interaction: Discord.ModalSubmitInteraction & { client: MainClient }): void | Promise<void>;
-};
-
-/**
- * Представляє автозаповнення програми.
- */
-export interface AutocompleteInteraction {
+export interface Component {
     name: string;
+    type: ComponentType;
+    options: {
+        cooldown?: number;
+        ownerOnly?: boolean;
+        devGuildOnly?: boolean;
+        bot_permissions?: [Discord.PermissionResolvable] | [];
+    };
 
-    execute(interaction: Discord.AutocompleteInteraction & { client: MainClient }): void | Promise<void>;
-};
+    execute(interaction: Discord.ButtonInteraction | Discord.AnySelectMenuInteraction | Discord.ModalSubmitInteraction | Discord.AutocompleteInteraction): Promise<void>;
+}
+
+/**
+ * @description Represents a button component of the program.
+ */
+export interface Button extends Component {
+    execute(interaction: Discord.ButtonInteraction): Promise<void>;
+}
+
+/**
+ * @description Represents a any select menu component of the program.
+ */
+export interface SelectMenu extends Component {
+    execute(interaction: Discord.StringSelectMenuInteraction | Discord.UserSelectMenuInteraction | Discord.MentionableSelectMenuInteraction | Discord.ChannelSelectMenuInteraction | Discord.RoleSelectMenuInteraction): Promise<void>;
+}
+
+/**
+ * @description Represents a string select menu component of the program.
+ */
+export interface StringSelectMenu extends SelectMenu {
+    execute(interaction: Discord.StringSelectMenuInteraction): Promise<void>;
+}
+
+/**
+ * @description Represents a user select menu component of the program.
+ */
+export interface UserSelectMenu extends SelectMenu {
+    execute(interaction: Discord.UserSelectMenuInteraction): Promise<void>;
+}
+
+/**
+ * @description Represents a mentionable select menu component of the program.
+ */
+export interface MentionableSelectMenu extends SelectMenu {
+    execute(interaction: Discord.MentionableSelectMenuInteraction): Promise<void>;
+}
+
+/**
+ * @description Represents a channel select menu component of the program.
+ */
+export interface ChannelSelectMenu extends SelectMenu {
+    execute(interaction: Discord.ChannelSelectMenuInteraction): Promise<void>;
+}
+
+/**
+ * @description Represents a role select menu component of the program.
+ */
+export interface RoleSelectMenu extends SelectMenu {
+    execute(interaction: Discord.RoleSelectMenuInteraction): Promise<void>;
+}
+
+/**
+ * @description Represents a modal submit component of the program.
+ */
+export interface Modal extends Component {
+    execute(interaction: Discord.ModalSubmitInteraction): Promise<void>;
+}
+
+/**
+ * @description Represents a autocomplete component of the program.
+ */
+export interface Autocomplete extends Component {
+    execute(interaction: Discord.AutocompleteInteraction): Promise<void>;
+}
