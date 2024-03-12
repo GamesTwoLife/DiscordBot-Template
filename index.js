@@ -50,9 +50,6 @@ Mongo();
 
 // Anti-crash
 process.on('unhandledRejection', async (error) => {
-	/**
-	 * @type {import("discord.js").TextChannel}
-	 */
 	const channel = client.channels.cache.get(channelId);
 
 	if (!channel || channel && !channel.permissionsFor(client.user?.id).has([PermissionsBitField.Flags.ManageChannels, PermissionsBitField.Flags.ManageWebhooks])) return console.error(error);
@@ -91,9 +88,6 @@ process.on('unhandledRejection', async (error) => {
 	}
 });
 process.on('uncaughtException', async (error) => {
-	/**
-	 * @type {import("discord.js").TextChannel}
-	 */
 	const channel = client.channels.cache.get(channelId);
 
 	if (!channel || channel && !channel.permissionsFor(client.user?.id).has([PermissionsBitField.Flags.ManageChannels, PermissionsBitField.Flags.ManageWebhooks])) return console.error(error);
@@ -132,9 +126,6 @@ process.on('uncaughtException', async (error) => {
 	}
 });
 process.on('rejectionHandled', async (error) => {
-	/**
-	 * @type {import("discord.js").TextChannel}
-	 */
 	const channel = client.channels.cache.get(channelId);
 
 	if (!channel || channel && !channel.permissionsFor(client.user?.id).has([PermissionsBitField.Flags.ManageChannels, PermissionsBitField.Flags.ManageWebhooks])) return console.error(error);
@@ -173,9 +164,6 @@ process.on('rejectionHandled', async (error) => {
 	}
 });
 process.on('warning', async (warning) => {
-	/**
-	 * @type {import("discord.js").TextChannel}
-	 */
 	const channel = client.channels.cache.get(channelId);
 
 	if (!channel || channel && !channel.permissionsFor(client.user?.id).has([PermissionsBitField.Flags.ManageChannels, PermissionsBitField.Flags.ManageWebhooks])) return console.error(warning);
