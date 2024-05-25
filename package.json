@@ -1,6 +1,6 @@
 {
   "name": "discordbot-template",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Шаблон для створення власного бота на основі discord-js!",
   "main": "index.js",
   "scripts": {
@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/GamesTwoLife/DiscordBot-Template#readme",
   "dependencies": {
-    "discord.js": "^14.14.1",
+    "discord.js": "^14.15.2",
     "fs": "^0.0.1-security",
     "i18next": "^23.10.0",
     "mongoose": "^7.0.2",

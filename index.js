@@ -17,7 +17,7 @@ const resources = require("./locales/resources");
  */
 const client = new Client({ 
 	allowedMentions: { parse: [ "roles", "users", "everyone" ] }, 
-	intents: [3276799], // Використовуйте сайт, наприклад https://discord-intents-calculator.vercel.app/
+	intents: [3276799 | 1 << 24 | 1 << 25], // 1 << 24 = GUILD_MESSAGE_POLLS; 1 << 25 = DIRECT_MESSAGE_POLLS;
 	partials: [
 		Partials.Channel,
 		Partials.GuildMember,
@@ -27,9 +27,7 @@ const client = new Client({
 		Partials.ThreadMember,
 		Partials.User
 	],
-	ws: { 
-		large_threshold: 250,
-	},
+	ws: { large_threshold: 250 },
 	presence: {
 		activities: [{
 			name: "custom",
