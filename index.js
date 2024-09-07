@@ -45,8 +45,7 @@ client.i18n = i18next.init({
 	},
 	resources: {
 		en: resources.en,
-		uk: resources.uk,
-		ru: resources.ru
+		uk: resources.uk
 	}
 });
 
@@ -215,9 +214,9 @@ process.on('warning', async (warning) => {
 
 (async () => {
 	await Event(client);
-    await Command(client);
+	await Command(client);
 	await Component(client);
-    await SlashUpdate(client);
+	await SlashUpdate(client);
 })()
 
 client.login(token);

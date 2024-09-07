@@ -1,4 +1,4 @@
-const { ContextMenuCommandBuilder, ApplicationCommandType } = require("discord.js");
+const { ContextMenuCommandBuilder, ApplicationCommandType, InteractionContextType } = require("discord.js");
 const { t } = require("i18next");
 
 /**
@@ -12,12 +12,12 @@ module.exports = {
             ru: t('commands:sample.user_sample.description', { lng: "ru" }).slice(0, 32)
         })
         .setType(ApplicationCommandType.User)
-        .setDMPermission(false),
+        .setContexts([InteractionContextType.Guild]),
     options: {
         cooldown: 10,
         ownerOnly: false,
         devGuildOnly: true,
-        bot_permissions: ["ViewChannel", "SendMessages"],
+        bot_permissions: [],
     },
     
     async execute(interaction) {

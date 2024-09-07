@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, InteractionContextType } = require("discord.js");
 const { t } = require("i18next");
 
 /**
@@ -12,12 +12,12 @@ module.exports = {
             uk: t('commands:info.ping.description', { lng: "uk" }),
             ru: t('commands:info.ping.description', { lng: "ru" })
         })
-        .setDMPermission(false),
+        .setContexts([InteractionContextType.Guild]),
     options: {
         cooldown: 30,
         ownerOnly: false,
         devGuildOnly: true,
-        bot_permissions: ["ViewChannel", "SendMessages"],
+        bot_permissions: [],
     },
 
     async execute(interaction) {

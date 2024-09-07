@@ -1,0 +1,19 @@
+{
+	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+	"eslint.experimental.useFlatConfig": true,
+	"eslint.workingDirectories": [
+		{ "directory": "${workspaceFolder}" },
+		{ "pattern": "./src/*/" }
+	],
+	"editor.fontLigatures": true,
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.organizeImports": "never",
+		"source.fixAll.eslint": "explicit",
+		"source.fixAll": "explicit"
+	},
+	"editor.trimAutoWhitespace": false,
+	"files.insertFinalNewline": true,
+	"files.eol": "\r\n",
+	"typescript.enablePromptUseWorkspaceTsdk": true
+}

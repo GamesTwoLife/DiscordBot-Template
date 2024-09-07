@@ -3,15 +3,15 @@ const { developers } = require("../../config.json");
 const { t } = require("i18next");
 
 module.exports = {
-    name: Events.InteractionCreate,
-    /**
-     * 
-     * @param {import('discord.js').CommandInteraction & { client: import('../../typings').MainClient }} interaction 
-     */
-    async execute(interaction) {
-        const { client, guild, user } = interaction;
+	name: Events.InteractionCreate,
+	/**
+	 * 
+	 * @param {import('discord.js').CommandInteraction & { client: import('../../typings').MainClient }} interaction 
+	 */
+	async execute(interaction) {
+		const { client, guild, user } = interaction;
 
-        if (!interaction.isChatInputCommand()) return;
+		if (!interaction.isChatInputCommand()) return;
 
 		try {
 			const command = client.commands.get(interaction.commandName);
@@ -70,24 +70,20 @@ module.exports = {
 			timestamps.set(user.id, now);
 			setTimeout(() => timestamps.delete(user.id), cooldownAmount);
 
-            return command.execute(interaction);
-        } catch (error) {
-            console.log(error);
-			if (interaction.deferred) {
-                return interaction.editReply({ 
-					content: t('common:events.Interaction.error_occured', { lng: interaction.locale, member: user.toString() })
-				});
-            } else if (interaction.replied) {
-				return interaction.followUp({
+			return command.execute(interaction);
+		} catch (error) {
+			console.log(error);
+			if (interaction.deferred || interaction.replied) {
+				return interaction.editReply({ 
 					content: t('common:events.Interaction.error_occured', { lng: interaction.locale, member: user.toString() }),
 					ephemeral: true
 				});
 			} else {
-                return interaction.reply({ 
+				return interaction.reply({ 
 					content: t('common:events.Interaction.error_occured', { lng: interaction.locale, member: user.toString() }), 
 					ephemeral: true 
 				});
-            }
-        }
-    },
+			}
+		}
+	},
 };

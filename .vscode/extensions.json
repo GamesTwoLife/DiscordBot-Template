@@ -1,0 +1,8 @@
+{
+	"recommendations": [
+		"esbenp.prettier-vscode",
+		"github.vscode-pull-request-github",
+		"christian-kohler.npm-intellisense",
+		"christian-kohler.path-intellisense"
+	]
+}
