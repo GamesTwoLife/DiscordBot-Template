@@ -1,12 +1,15 @@
 <h1 align="center">Ласкаво просимо до шаблону дискорд бота</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/версія-v1.3.0-blue.svg" />
-  <a href="https://github.com/GamesTwoLife/DiscordBot-Template#readme" target="_blank">
-    <img alt="Документація" src="https://img.shields.io/badge/Документація-yes-brightgreen.svg" />
-  </a>
-  <a href="https://github.com/GamesTwoLife/DiscordBot-Template/graphs/commit-activity" target="_blank">
-    <img alt="Підтримується" src="https://img.shields.io/badge/Підтримується%3F-yes-green.svg" />
-  </a>
+	<img alt="Version" src="https://img.shields.io/badge/версія-v1.3.0-blue.svg" />
+	<a href="https://www.npmjs.com/package/discord.js">
+		<img src="https://img.shields.io/npm/v/discord.js.svg" alt="npm version" />
+	</a>
+	<a href="https://github.com/GamesTwoLife/DiscordBot-Template#readme" target="_blank">
+		<img alt="Документація" src="https://img.shields.io/badge/Документація-yes-brightgreen.svg" />
+	</a>
+	<a href="https://github.com/GamesTwoLife/DiscordBot-Template/graphs/commit-activity" target="_blank">
+		<img alt="Підтримується" src="https://img.shields.io/badge/Підтримується%3F-yes-green.svg" />
+	</a>
 </p>
 
 > Шаблон бота з **відкритим вихідним кодом** `discord.js`, який базується на офіційному [посібнику з discord.js](https://discordjs.guide/), щоб розпочати створення свого особистого бота для Discord!
@@ -30,7 +33,7 @@ Discord Bot Template — це шаблон бота з відкритим вих
 #### • **Динамічний обробник команд (як слеш так і контекстного меню):**
 
 - Мій шаблон постачається з динамічним обробником команд, який дуже легко налаштовувати та створювати команди.
-- Команди в папці commands отримують об’єкт [`ChatInputCommandInteraction`](https://discord.js.org/docs/packages/discord.js/14.16.1/ChatInputCommandInteraction:Class) або [`ContextMenuCommandInteraction`](https://discord.js.org/docs/packages/discord.js/14.16.1/ContextMenuCommandInteraction:Class) в залежності від типу команди (слеш або контекстна).
+- Команди в папці commands отримують об’єкт [`ChatInputCommandInteraction`](https://discord.js.org/docs/packages/discord.js/14.16.3/ChatInputCommandInteraction:Class) або [`ContextMenuCommandInteraction`](https://discord.js.org/docs/packages/discord.js/14.16.3/ContextMenuCommandInteraction:Class) в залежності від типу команди (слеш або контекстна).
 - **ВАЖЛИВО:** У шаблоні ми надсилаємо команди в Discord для реєстрації лише в 1 гільдії. Це тому, що є 2 типи команд, гільдійські та глобальні. Команди гільдії обмежені 1 гільдією, але щоразу, коли ви їх оновлюєте, вони набувають чинності негайно, тоді як для глобальних команд потрібно до 1 години. Тому використовуйте команди гільди у розробці та глобальні команди для виробництва. (змінити це можна використавши параметр в кожному файлі команди `devGuildOnly`: `true` - команда в 1 гільдії, `false` - глобальна команда)
 
 #### • **Динамічний обробник взаємодії кнопок:**
