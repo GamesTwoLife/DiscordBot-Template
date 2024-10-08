@@ -1,14 +1,14 @@
 const { RESTEvents } = require('discord.js');
 
 module.exports = {
-    name: RESTEvents.RateLimited,
+	name: RESTEvents.RateLimited,
 
-    /**
-     * 
-     * @param {import('discord.js').RateLimitData} rateLimitInfo 
-     */
-    execute(rateLimitInfo) {
-        console.log(`
+	/**
+	 * 
+	 * @param {import('discord.js').RateLimitData} rateLimitInfo 
+	 */
+	execute(rateLimitInfo) {
+		console.log(`
 Global: ${rateLimitInfo.global}
 Hash: ${rateLimitInfo.hash}
 Limit: ${rateLimitInfo.limit}
@@ -17,6 +17,6 @@ Method: ${rateLimitInfo.method}
 Route: ${rateLimitInfo.route}
 TimeToReset: ${rateLimitInfo.timeToReset}
 URL: ${rateLimitInfo.url}
-        `);
-    },
+		`);
+	},
 };

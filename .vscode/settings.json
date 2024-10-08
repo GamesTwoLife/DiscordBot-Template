@@ -1,10 +1,5 @@
 {
-	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
-	"eslint.experimental.useFlatConfig": true,
-	"eslint.workingDirectories": [
-		{ "directory": "${workspaceFolder}" },
-		{ "pattern": "./src/*/" }
-	],
+	"editor.inlayHints.enabled": "on",
 	"editor.fontLigatures": true,
 	"editor.formatOnSave": true,
 	"editor.codeActionsOnSave": {

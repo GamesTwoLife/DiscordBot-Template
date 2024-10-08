@@ -6,7 +6,7 @@ module.exports = {
 	type: "selectmenu",
 
 	async execute(interaction) {
-        if (!interaction.isRoleSelectMenu()) return;
+		if (!interaction.isRoleSelectMenu()) return;
 
 		return interaction.reply({ content: `<@&${interaction.values[0]}> ${interaction.values[0]}`, ephemeral: true });
 	},

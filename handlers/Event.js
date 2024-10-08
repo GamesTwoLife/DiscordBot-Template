@@ -7,26 +7,26 @@ const restEvents = ["restDebug", "handlerSweep", "hashSweep", "invalidRequestWar
  * @param {import("./../typings").MainClient} client 
  */
 module.exports = async (client) => {
-    const eventsBasePath = path.join(__dirname, "../events");
-    
-    for (const folder of await readdir(eventsBasePath)) {
-        const folderPath = `${eventsBasePath}/${folder}`;
+	const eventsBasePath = path.join(__dirname, "../events");
+	
+	for (const folder of await readdir(eventsBasePath)) {
+		const folderPath = `${eventsBasePath}/${folder}`;
 
-        for (const file of await readdir(folderPath)) {
-            try {
-                const eventPath = path.join(folderPath, file);
-                const event = require(eventPath);
+		for (const file of await readdir(folderPath)) {
+			try {
+				const eventPath = path.join(folderPath, file);
+				const event = require(eventPath);
 
-                if (event.once) {
-                    client.once(event.name, (...args) => event.execute(...args))
-                } else if (restEvents.includes(event.name)) {
-                    client.rest.on(event.name, (...args) => event.execute(...args))
-                } else {
-                    client.on(event.name, (...args) => event.execute(...args))
-                }
-            } catch (error) {
-                console.error(`[EventHandler] Error loading an event from a file ${file}: ${error.message}`);
-            }
-        }
-    }
+				if (event.once) {
+					client.once(event.name, (...args) => event.execute(...args))
+				} else if (restEvents.includes(event.name)) {
+					client.rest.on(event.name, (...args) => event.execute(...args, client))
+				} else {
+					client.on(event.name, (...args) => event.execute(...args, client))
+				}
+			} catch (error) {
+				console.error(`[EventHandler] Error loading an event from a file ${file}: ${error.message}`);
+			}
+		}
+	}
 };

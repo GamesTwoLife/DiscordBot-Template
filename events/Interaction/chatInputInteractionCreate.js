@@ -49,18 +49,14 @@ module.exports = {
 				if (now < expirationTime) {
 					const expiredTimestamp = Math.round(expirationTime / 1000);
 
-					if (interaction.deferred) {
-						return interaction.editReply({
-							content: t('common:events.Interaction.cooldown_command', { lng: interaction.locale, member: user.toString(), commandName: commandName, expiredTimestamp }),
-						});
-					} else if (interaction.replied) {
-						return interaction.followUp({
-							content: t('common:events.Interaction.cooldown_command', { lng: interaction.locale, member: user.toString(), commandName: commandName, expiredTimestamp }),
+					if (interaction.deferred || interaction.replied) {
+						return await interaction.followUp({
+							content: t('common:events.Interaction.cooldown_command', { lng: interaction.locale, member: user.toString(), commandName: interaction.commandName, expiredTimestamp }),
 							ephemeral: true
 						});
 					} else {
-						return interaction.reply({
-							content: t('common:events.Interaction.cooldown_command', { lng: interaction.locale, member: user.toString(), commandName: commandName, expiredTimestamp }),
+						return await interaction.reply({
+							content: t('common:events.Interaction.cooldown_command', { lng: interaction.locale, member: user.toString(), commandName: interaction.commandName, expiredTimestamp }),
 							ephemeral: true
 						});
 					}
@@ -70,16 +66,16 @@ module.exports = {
 			timestamps.set(user.id, now);
 			setTimeout(() => timestamps.delete(user.id), cooldownAmount);
 
-			return command.execute(interaction);
+			await command.execute(interaction);
 		} catch (error) {
 			console.log(error);
 			if (interaction.deferred || interaction.replied) {
-				return interaction.editReply({ 
-					content: t('common:events.Interaction.error_occured', { lng: interaction.locale, member: user.toString() }),
-					ephemeral: true
+				return await interaction.followUp({ 
+					content: t('common:events.Interaction.error_occured', { lng: interaction.locale, member: user.toString() }), 
+					ephemeral: true 
 				});
 			} else {
-				return interaction.reply({ 
+				return await interaction.reply({ 
 					content: t('common:events.Interaction.error_occured', { lng: interaction.locale, member: user.toString() }), 
 					ephemeral: true 
 				});

@@ -10,14 +10,16 @@ const UserDB = require("./db/users");
 
 const i18next = require("i18next");
 const resources = require("./locales/resources");
+const { Options } = require("discord.js");
 
 /**
  * @type {import("./typings").MainClient}
  * @description The main client of the program
  */
-const client = new Client({ 
+const client = new Client({
+	failIfNotExists: false,
 	allowedMentions: { parse: [ "roles", "users", "everyone" ] }, 
-	intents: [3276799 | 1 << 24 | 1 << 25], // 1 << 24 = GUILD_MESSAGE_POLLS; 1 << 25 = DIRECT_MESSAGE_POLLS;
+	intents: [53608447], // All Intents
 	partials: [
 		Partials.Channel,
 		Partials.GuildMember,
@@ -27,7 +29,28 @@ const client = new Client({
 		Partials.ThreadMember,
 		Partials.User
 	],
-	ws: { large_threshold: 250 },
+	ws: { large_threshold: 100 },
+	makeCache: Options.cacheWithLimits({
+		...Options.DefaultMakeCacheSettings,
+		MessageManager: 100, // Maximum 100 messages in the cache
+		GuildMemberManager: 50, // Maximum 50 participants in the cache
+		ReactionManager: 0, // Reaction cache is disabled
+	}),
+	sweepers: {
+		...Options.DefaultSweeperSettings,
+		messages: {
+			interval: 1_800, // Clearing the message cache every 30 minutes
+			lifetime: 900, // Delete messages older than 15 minutes
+		},
+		users: {
+			interval: 1_800, // Clearing the user cache every 30 minutes
+			filter: () => user => user.bot && user.id !== user.client.user.id,
+		},
+		guildMembers: {
+			interval: 1_800, // Clearing the participant cache every 30 minutes
+			filter: () => member => member.bot && member.id !== member.client.user.id,
+		},
+	},
 	presence: {
 		activities: [{
 			name: "custom",

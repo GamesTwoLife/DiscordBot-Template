@@ -2,13 +2,13 @@
  * @type {import("../../../typings").Autocomplete}
  */
 module.exports = {
-    name: "sample",
+	name: "sample",
 	type: "autocomplete",
 
-    async execute(interaction) {
+	async execute(interaction) {
 		if (!interaction.isAutocomplete()) return;
 		
-        const { options } = interaction;
+		const { options } = interaction;
 
 		const choices = ['Popular Topics: Threads', 'Sharding: Getting started', 'Library: Voice Connections', 'Interactions: Replying to slash commands', 'Popular Topics: Embed preview'];
 
@@ -24,5 +24,5 @@ module.exports = {
 		return interaction.respond(
 			filtered.map(choice => ({ name: choice, value: choice })),
 		);
-    },
+	},
 };

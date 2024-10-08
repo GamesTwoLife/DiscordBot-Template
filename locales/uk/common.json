@@ -1,15 +1,15 @@
 {
-    "events": {
-        "Interaction": {
-            "no_command": "{{member}}, Команда не існує або щось дивне сталось",
-            "only_developer": "{{member}}, Ця взаємодія призначена лише для розробників бота",
-            "missing_permissions": "{{member}}, Мені потрібні наступні дозволи для виконання цієї взаємодії: {{permissions}}",
-            "cooldown_command": "{{member}}, Досягнуто ліміт використання команди `{{commandName}}`, спробуйте ще раз <t:{{expiredTimestamp}}:R>",
-            "cooldown_button": "{{member}}, Досягнуто ліміт використання кнопки `{{buttonId}}`, спробуйте ще раз <t:{{expiredTimestamp}}:R>",
-            "cooldown_menu": "{{member}}, Досягнуто ліміт використання меню `{{menuId}}`, спробуйте ще раз <t:{{expiredTimestamp}}:R>",
-            "cooldown_modal": "{{member}}, Досягнуто ліміт використання модального подання `{{modalId}}`, спробуйте ще раз <t:{{expiredTimestamp}}:R>",
-            "error_occured": "{{member}}, Йой друже, схоже, сталася непередбачувана помилка, ми вже відстежили її і незабаром виправимо",
-            "something_strange": "{{member}}, Щось дивне відбувається у контекстному меню. Отримано контекстне меню невідомого типу."
-        }
-    }
+	"events": {
+		"Interaction": {
+			"no_command": "{{member}}, Команда не існує або щось дивне сталось",
+			"only_developer": "{{member}}, Ця взаємодія призначена лише для розробників бота",
+			"missing_permissions": "{{member}}, Мені потрібні наступні дозволи для виконання цієї взаємодії: {{permissions}}",
+			"cooldown_command": "{{member}}, Досягнуто ліміт використання команди `{{commandName}}`, спробуйте ще раз <t:{{expiredTimestamp}}:R>",
+			"cooldown_button": "{{member}}, Досягнуто ліміт використання кнопки `{{buttonId}}`, спробуйте ще раз <t:{{expiredTimestamp}}:R>",
+			"cooldown_menu": "{{member}}, Досягнуто ліміт використання меню `{{menuId}}`, спробуйте ще раз <t:{{expiredTimestamp}}:R>",
+			"cooldown_modal": "{{member}}, Досягнуто ліміт використання модального подання `{{modalId}}`, спробуйте ще раз <t:{{expiredTimestamp}}:R>",
+			"error_occured": "{{member}}, Йой друже, схоже, сталася непередбачувана помилка, ми вже відстежили її і незабаром виправимо",
+			"something_strange": "{{member}}, Щось дивне відбувається у контекстному меню. Отримано контекстне меню невідомого типу."
+		}
+	}
 }

@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, EmbedBuilder, UserSelectMenuBuilder, ChannelSelectMenuBuilder, MentionableSelectMenuBuilder, RoleSelectMenuBuilder, PollLayoutType, InteractionContextType } = require("discord.js");
+const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, EmbedBuilder, UserSelectMenuBuilder, ChannelSelectMenuBuilder, MentionableSelectMenuBuilder, RoleSelectMenuBuilder, PollLayoutType, InteractionContextType, ApplicationIntegrationType } = require("discord.js");
 const { t } = require("i18next");
 const buttonPagination = require("../../utils/buttonPagination");
 const buttonWrapper = require("../../utils/buttonWrapper");
@@ -11,24 +11,21 @@ module.exports = {
 		.setName("sample")
 		.setDescription(t('commands:sample.sample.description', { lng: "en" }))
 		.setDescriptionLocalizations({
-			uk: t('commands:sample.sample.description', { lng: "uk" }),
-			ru: t('commands:sample.sample.description', { lng: "ru" })
+			uk: t('commands:sample.sample.description', { lng: "uk" })
 		})
 		.addSubcommand(subcommand =>
 			subcommand
 				.setName("autocomplete")
 				.setDescription(t('commands:sample.sample.autocomplete.description', { lng: "en" }))
 				.setDescriptionLocalizations({
-					uk: t('commands:sample.sample.autocomplete.description', { lng: "uk" }),
-					ru: t('commands:sample.sample.autocomplete.description', { lng: "ru" })
+					uk: t('commands:sample.sample.autocomplete.description', { lng: "uk" })
 				})
 				.addStringOption(option =>
 					option
 						.setName("input")
 						.setDescription(t('commands:sample.sample.autocomplete.options.input', { lng: "en" }))
 						.setDescriptionLocalizations({
-							uk: t('commands:sample.sample.autocomplete.options.input', { lng: "uk" }),
-							ru: t('commands:sample.sample.autocomplete.options.input', { lng: "ru" })
+							uk: t('commands:sample.sample.autocomplete.options.input', { lng: "uk" })
 						})
 						.setAutocomplete(true)
 						.setRequired(true)
@@ -39,8 +36,7 @@ module.exports = {
 				.setName("button")
 				.setDescription(t('commands:sample.sample.button.description', { lng: "en" }))
 				.setDescriptionLocalizations({
-					uk: t('commands:sample.sample.button.description', { lng: "uk" }),
-					ru: t('commands:sample.sample.button.description', { lng: "ru" })
+					uk: t('commands:sample.sample.button.description', { lng: "uk" })
 				})
 		)
 		.addSubcommand(subcommand =>
@@ -49,8 +45,7 @@ module.exports = {
 				.setDescription("Sample Menu")
 				.setDescription(t('commands:sample.sample.menu.description', { lng: "en" }))
 				.setDescriptionLocalizations({
-					uk: t('commands:sample.sample.menu.description', { lng: "uk" }),
-					ru: t('commands:sample.sample.menu.description', { lng: "ru" })
+					uk: t('commands:sample.sample.menu.description', { lng: "uk" })
 				})
 		)
 		.addSubcommand(subcommand =>
@@ -58,8 +53,7 @@ module.exports = {
 				.setName("modal")
 				.setDescription(t('commands:sample.sample.modal.description', { lng: "en" }))
 				.setDescriptionLocalizations({
-					uk: t('commands:sample.sample.modal.description', { lng: "uk" }),
-					ru: t('commands:sample.sample.modal.description', { lng: "ru" })
+					uk: t('commands:sample.sample.modal.description', { lng: "uk" })
 				})
 		)
 		.addSubcommand(subcommand =>
@@ -67,8 +61,7 @@ module.exports = {
 				.setName("pagination")
 				.setDescription(t('commands:sample.sample.pagination.description', { lng: "en" }))
 				.setDescriptionLocalizations({
-					uk: t('commands:sample.sample.pagination.description', { lng: "uk" }),
-					ru: t('commands:sample.sample.pagination.description', { lng: "ru" })
+					uk: t('commands:sample.sample.pagination.description', { lng: "uk" })
 				})
 		)
 		.addSubcommand(subcommand =>
@@ -76,8 +69,7 @@ module.exports = {
 				.setName("buttonwrapper")
 				.setDescription(t('commands:sample.sample.buttonwrapper.description', { lng: "en" }))
 				.setDescriptionLocalizations({
-					uk: t('commands:sample.sample.buttonwrapper.description', { lng: "uk" }),
-					ru: t('commands:sample.sample.buttonwrapper.description', { lng: "ru" })
+					uk: t('commands:sample.sample.buttonwrapper.description', { lng: "uk" })
 				})
 		)
 		.addSubcommand(subcommand =>
@@ -85,11 +77,11 @@ module.exports = {
 				.setName("create-poll")
 				.setDescription(t('commands:sample.sample.create-poll.description', { lng: "en" }))
 				.setDescriptionLocalizations({
-					uk: t('commands:sample.sample.create-poll.description', { lng: "uk" }),
-					ru: t('commands:sample.sample.create-poll.description', { lng: "ru" })
+					uk: t('commands:sample.sample.create-poll.description', { lng: "uk" })
 				})
 		)
-		.setContexts([InteractionContextType.Guild]),
+		.setContexts(InteractionContextType.Guild)
+		.setIntegrationTypes(ApplicationIntegrationType.GuildInstall),
 	options: {
 		cooldown: 10,
 		ownerOnly: false,
