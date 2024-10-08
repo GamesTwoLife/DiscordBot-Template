@@ -1,6 +1,6 @@
 <h1 align="center">Ласкаво просимо до шаблону дискорд бота</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/версія-v1.2.0-blue.svg" />
+  <img alt="Version" src="https://img.shields.io/badge/версія-v1.3.0-blue.svg" />
   <a href="https://github.com/GamesTwoLife/DiscordBot-Template#readme" target="_blank">
     <img alt="Документація" src="https://img.shields.io/badge/Документація-yes-brightgreen.svg" />
   </a>
