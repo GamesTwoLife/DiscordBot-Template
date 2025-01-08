@@ -35,7 +35,7 @@
 	},
 	"homepage": "https://github.com/GamesTwoLife/DiscordBot-Template#readme",
 	"dependencies": {
-		"discord.js": "^14.16.3",
+		"discord.js": "^14.17.3",
 		"fs": "^0.0.1-security",
 		"i18next": "^23.10.0",
 		"mongoose": "^7.0.2",
