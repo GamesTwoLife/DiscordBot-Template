@@ -1,4 +1,4 @@
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilder } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilder, MessageFlags } = require("discord.js");
 const { t } = require("i18next");
 
 /**
@@ -110,12 +110,12 @@ module.exports = async (interaction, pages, time = 30 * 1000, emojis = ["⏪", "
 		if (interaction.deferred || interaction.replied) {
 			return interaction.followUp({
 				content: `${err.message}`,
-				ephemeral: true
+				flags: MessageFlags.Ephemeral
 			});
 		} else {
 			return interaction.reply({
 				content: `${err.message}`,
-				ephemeral: true
+				flags: MessageFlags.Ephemeral
 			});
 		}
 	}

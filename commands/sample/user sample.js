@@ -1,4 +1,4 @@
-const { ContextMenuCommandBuilder, ApplicationCommandType, InteractionContextType, ApplicationIntegrationType } = require("discord.js");
+const { ContextMenuCommandBuilder, ApplicationCommandType, InteractionContextType, ApplicationIntegrationType, MessageFlags } = require("discord.js");
 const { t } = require("i18next");
 
 /**
@@ -24,7 +24,7 @@ module.exports = {
 		
 		await interaction.reply({ 
 			content: t('commands:sample.user_sample.content', { lng: interaction.locale, id: targetId, member: targetMember.toString(), user: targetUser.toString() }), 
-			ephemeral: true 
+			flags: MessageFlags.Ephemeral
 		});
 	},
 };

@@ -1,4 +1,4 @@
-const { Events, Collection } = require("discord.js");
+const { Events, Collection, MessageFlags } = require("discord.js");
 const { developers } = require("../../config.json");
 const { t } = require("i18next");
 
@@ -20,13 +20,19 @@ module.exports = {
 
 			for (const modal of modals) {
 				if (modal.options && modal.options?.ownerOnly && !developers.includes(user.id)) {
-					return interaction.reply({ content: t('common:events.Interaction.no_command', { lng: interaction.locale, member: user.toString() }), ephemeral: true });
+					return interaction.reply({
+						content: t('common:events.Interaction.no_command', { lng: interaction.locale, member: user.toString() }),
+						flags: MessageFlags.Ephemeral
+					});
 				}
 	
 				if (modal.options && modal.options?.bot_permissions && !guild.members.me.permissions.has(modal.options?.bot_permissions)) {
 					const permsBot = modal.options?.bot_permissions?.map(x => x).join(', ');
 	
-					return interaction.reply({ content: t('common:events.Interaction.missing_permissions', { lng: interaction.locale, member: user.toString(), permissions: permsBot }), ephemeral: true });
+					return interaction.reply({
+						content: t('common:events.Interaction.missing_permissions', { lng: interaction.locale, member: user.toString(), permissions: permsBot }),
+						flags: MessageFlags.Ephemeral
+					});
 				}
 	
 				const { cooldowns } = client;
@@ -48,12 +54,12 @@ module.exports = {
 						if (interaction.deferred || interaction.replied) {
 							return interaction.followUp({
 								content: t('common:events.Interaction.cooldown_modal', { lng: interaction.locale, member: user.toString(), modalId: interaction.customId, expiredTimestamp }),
-								ephemeral: true
+								flags: MessageFlags.Ephemeral
 							});
 						} else {
 							return interaction.reply({
 								content: t('common:events.Interaction.cooldown_modal', { lng: interaction.locale, member: user.toString(), modalId: interaction.customId, expiredTimestamp }),
-								ephemeral: true
+								flags: MessageFlags.Ephemeral
 							});
 						}
 					}
@@ -69,12 +75,12 @@ module.exports = {
 			if (interaction.deferred || interaction.replied) {
 				return interaction.followUp({ 
 					content: t('common:events.Interaction.error_occured', { lng: interaction.locale, member: user.toString() }),
-					ephemeral: true
+					flags: MessageFlags.Ephemeral
 				});
 			} else {
 				return interaction.reply({ 
 					content: t('common:events.Interaction.error_occured', { lng: interaction.locale, member: user.toString() }), 
-					ephemeral: true 
+					flags: MessageFlags.Ephemeral
 				});
 			}
 		}

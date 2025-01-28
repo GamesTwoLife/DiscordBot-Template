@@ -1,4 +1,4 @@
-const { Events, Collection } = require("discord.js");
+const { Events, Collection, MessageFlags } = require("discord.js");
 const { developers, guildId } = require("../../config.json");
 const { t } = require("i18next");
 
@@ -21,13 +21,19 @@ module.exports = {
 
 			for (const selectmenu of selectmenus) {
 				if (selectmenu.options && selectmenu.options?.ownerOnly && !developers.includes(user.id)) {
-					return interaction.reply({ content: t('common:events.Interaction.no_command', { lng: interaction.locale, member: user.toString() }), ephemeral: true });
+					return interaction.reply({
+						content: t('common:events.Interaction.no_command', { lng: interaction.locale, member: user.toString() }),
+						flags: MessageFlags.Ephemeral
+					});
 				}
 
 				if (selectmenu.options && selectmenu.options?.bot_permissions && !guild.members.me.permissions.has(selectmenu.options?.bot_permissions)) {
 					const permsBot = selectmenu.options?.bot_permissions?.map(x => x).join(', ');
 	
-					return interaction.reply({ content: t('common:events.Interaction.missing_permissions', { lng: interaction.locale, member: user.toString(), permissions: permsBot }), ephemeral: true });
+					return interaction.reply({
+						content: t('common:events.Interaction.missing_permissions', { lng: interaction.locale, member: user.toString(), permissions: permsBot }),
+						flags: MessageFlags.Ephemeral
+					});
 				}
 	
 				if (!cooldowns.has(interaction.customId)) {
@@ -47,12 +53,12 @@ module.exports = {
 						if (interaction.deferred || interaction.replied) {
 							return interaction.followUp({
 								content: t('common:events.Interaction.cooldown_menu', { lng: interaction.locale, member: user.toString(), menuId: interaction.customId, expiredTimestamp }),
-								ephemeral: true
+								flags: MessageFlags.Ephemeral
 							});
 						} else {
 							return interaction.reply({
 								content: t('common:events.Interaction.cooldown_menu', { lng: interaction.locale, member: user.toString(), menuId: interaction.customId, expiredTimestamp }),
-								ephemeral: true
+								flags: MessageFlags.Ephemeral
 							});
 						}
 					}
@@ -68,12 +74,12 @@ module.exports = {
 			if (interaction.deferred || interaction.replied) {
 				return interaction.followUp({ 
 					content: t('common:events.Interaction.error_occured', { lng: interaction.locale, member: user.toString() }),
-					ephemeral: true
+					flags: MessageFlags.Ephemeral
 				});
 			} else {
 				return interaction.reply({ 
 					content: t('common:events.Interaction.error_occured', { lng: interaction.locale, member: user.toString() }), 
-					ephemeral: true 
+					flags: MessageFlags.Ephemeral
 				});
 			}
 		}

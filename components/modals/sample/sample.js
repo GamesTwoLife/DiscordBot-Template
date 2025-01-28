@@ -1,3 +1,5 @@
+const { MessageFlags } = require("discord.js");
+
 /**
  * @type {import("../../../typings").Modal}
  */
@@ -12,6 +14,6 @@ module.exports = {
 
 		const input = fields.getTextInputValue('input');
 
-		return interaction.reply({ content: `${input}`, ephemeral: true });
+		return interaction.reply({ content: `${input}`, flags: MessageFlags.Ephemeral });
 	},
 };
