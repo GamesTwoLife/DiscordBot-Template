@@ -1,27 +1,20 @@
-<h1 align="center">Ласкаво просимо до шаблону дискорд бота</h1>
-<p>
-	<img alt="Version" src="https://img.shields.io/badge/версія-v1.3.0-blue.svg" />
-	<a href="https://www.npmjs.com/package/discord.js">
-		<img src="https://img.shields.io/npm/v/discord.js.svg" alt="npm version" />
-	</a>
-	<a href="https://github.com/GamesTwoLife/DiscordBot-Template#readme" target="_blank">
-		<img alt="Документація" src="https://img.shields.io/badge/Документація-yes-brightgreen.svg" />
-	</a>
-	<a href="https://github.com/GamesTwoLife/DiscordBot-Template/graphs/commit-activity" target="_blank">
-		<img alt="Підтримується" src="https://img.shields.io/badge/Підтримується%3F-yes-green.svg" />
-	</a>
-</p>
+# Ласкаво просимо до шаблону дискорд бота
+
+![Version](https://img.shields.io/badge/версія-v1.3.1-blue.svg)
+[![npm version](https://img.shields.io/npm/v/discord.js.svg)](https://www.npmjs.com/package/discord.js)
+[![Документація](https://img.shields.io/badge/Документація-yes-brightgreen.svg)](https://github.com/GamesTwoLife/DiscordBot-Template#readme)
+[![Підтримується](https://img.shields.io/badge/Підтримується%3F-yes-green.svg)](https://github.com/GamesTwoLife/DiscordBot-Template/graphs/commit-activity)
 
 > Шаблон бота з **відкритим вихідним кодом** `discord.js`, який базується на офіційному [посібнику з discord.js](https://discordjs.guide/), щоб розпочати створення свого особистого бота для Discord!
 
-### [Домашня сторінка](https://github.com/GamesTwoLife/DiscordBot-Template#readme)
+## [Домашня сторінка](https://github.com/GamesTwoLife/DiscordBot-Template#readme)
 
 ## Введення
 
 Discord Bot Template — це шаблон бота з відкритим вихідним кодом на основі discord.js для початку роботи над новим проектом бота. Це класичний шаблон javascript, який не вимагає жодних зовнішніх залежностей, на відміну від інших відомих фреймворків. (Це не фреймворк!)
 За допомогою цього шаблону можна масштабувати будь-який проект бота. (на основі одного або кількох серверів) Все залежить від вашої творчості!
 
-### Особливості:
+### Особливості
 
 Цей шаблон містить багато вбудованих корисних і гнучких функцій, наприклад:
 
@@ -33,7 +26,7 @@ Discord Bot Template — це шаблон бота з відкритим вих
 #### • **Динамічний обробник команд (як слеш так і контекстного меню):**
 
 - Мій шаблон постачається з динамічним обробником команд, який дуже легко налаштовувати та створювати команди.
-- Команди в папці commands отримують об’єкт [`ChatInputCommandInteraction`](https://discord.js.org/docs/packages/discord.js/14.16.3/ChatInputCommandInteraction:Class) або [`ContextMenuCommandInteraction`](https://discord.js.org/docs/packages/discord.js/14.16.3/ContextMenuCommandInteraction:Class) в залежності від типу команди (слеш або контекстна).
+- Команди в папці commands отримують об’єкт [`ChatInputCommandInteraction`](https://discord.js.org/docs/packages/discord.js/14.17.3/ChatInputCommandInteraction:Class) або [`ContextMenuCommandInteraction`](https://discord.js.org/docs/packages/discord.js/14.17.3/ContextMenuCommandInteraction:Class) в залежності від типу команди (слеш або контекстна).
 - **ВАЖЛИВО:** У шаблоні ми надсилаємо команди в Discord для реєстрації лише в 1 гільдії. Це тому, що є 2 типи команд, гільдійські та глобальні. Команди гільдії обмежені 1 гільдією, але щоразу, коли ви їх оновлюєте, вони набувають чинності негайно, тоді як для глобальних команд потрібно до 1 години. Тому використовуйте команди гільди у розробці та глобальні команди для виробництва. (змінити це можна використавши параметр в кожному файлі команди `devGuildOnly`: `true` - команда в 1 гільдії, `false` - глобальна команда)
 
 #### • **Динамічний обробник взаємодії кнопок:**
@@ -86,7 +79,7 @@ npm start
 
 ## Автор
 
-**GamesTwoLife**
+### GamesTwoLife
 
 - Github: [@GamesTwoLife](https://github.com/GamesTwoLife)
 
@@ -96,7 +89,8 @@ npm start
 
 ## Сприяння
 
-Вітаються внески, проблеми та запити щодо функцій!<br />Не соромтеся перевірити [сторінку проблем](https://github.com/GamesTwoLife/DiscordBot-Template/issues). Ви також можете ознайомитися з [посібником зі створення внеску](https://github.com/GamesTwoLife/DiscordBot-Template/blob/master/CONTRIBUTING.md).
+Вітаються внески, проблеми та запити щодо функцій!
+Не соромтеся перевірити [сторінку проблем](https://github.com/GamesTwoLife/DiscordBot-Template/issues). Ви також можете ознайомитися з [посібником зі створення внеску](https://github.com/GamesTwoLife/DiscordBot-Template/blob/master/CONTRIBUTING.md).
 
 ## Продемонструйте вашу підтримку
 
@@ -104,7 +98,7 @@ npm start
 
 ## Ліцензія
 
-Copyright © 2023 [GamesTwoLife](https://github.com/GamesTwoLife).<br />
-Цей проект має ліцензію [Apache-2.0](LICENSE).
+Copyright © 2023 [GamesTwoLife](https://github.com/GamesTwoLife).  
+Цей проект має ліцензію [MIT](LICENSE).
 
 ---
