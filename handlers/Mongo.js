@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const { mongoURL } = require("./../config.json");
 
 module.exports = async () => {
-	mongoose.Promise = Promise;
 	mongoose.connect(mongoURL);
 	
 	// Handling connection errors
