@@ -1,21 +1,22 @@
 const { readdir } = require("fs/promises");
-const path = require("path");
+const { join } = require("path");
+
 
 /**
  * 
  * @param {import("./../typings").MainClient} client 
  */
 module.exports = async (client) => {
-	const commandsBasePath = path.join(__dirname, "../commands");
+	const commandsBasePath = join(__dirname, "../commands");
 
 	for (const module of await readdir(commandsBasePath)) {
-		const modulePath = path.join(commandsBasePath, module);
+		const modulePath = join(commandsBasePath, module);
 		const commandFiles = await readdir(modulePath);
 
 		for (const commandFile of commandFiles) {
 			if (!commandFile.endsWith('.js')) continue;
 			try {
-				const commandPath = path.join(modulePath, commandFile);
+				const commandPath = join(modulePath, commandFile);
 
 				/** @type {import("./../typings").Command} */
 				const command = require(commandPath);
