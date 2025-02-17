@@ -3,7 +3,7 @@ declare type i18next = typeof import("i18next");
 declare type GuildDB = typeof import("./db/guilds");
 declare type UserDB = typeof import("./db/users");
 
-export type ComponentType = "button" | "selectmenu" | "autocomplete" | "modalSubmit"
+export type ComponentType = "button" | "selectmenu" | "modalSubmit";
 
 /**
  * @description Modified built-in client with support for command/event handlers.
@@ -30,13 +30,14 @@ export interface Command {
 	};
 
 	execute(interaction: (Discord.ChatInputCommandInteraction | Discord.ContextMenuCommandInteraction) & { client: MainClient }): void | Promise<void>;
+	autocomplete(interaction: Discord.AutocompleteInteraction & { client: MainClient }): void | Promise<void>;
 };
 
 /**
  * @description Represents a component of the program.
  */
 export interface Component {
-	name: string;
+	customId: string;
 	type: ComponentType;
 	options: {
 		cooldown?: number;
@@ -45,7 +46,7 @@ export interface Component {
 		bot_permissions?: [Discord.PermissionResolvable] | [];
 	};
 
-	execute(interaction: Discord.ButtonInteraction | Discord.AnySelectMenuInteraction | Discord.ModalSubmitInteraction | Discord.AutocompleteInteraction): Promise<void>;
+	execute(interaction: Discord.ButtonInteraction | Discord.AnySelectMenuInteraction | Discord.ModalSubmitInteraction): Promise<void>;
 }
 
 /**
@@ -102,11 +103,4 @@ export interface RoleSelectMenu extends SelectMenu {
  */
 export interface Modal extends Component {
 	execute(interaction: Discord.ModalSubmitInteraction): Promise<void>;
-}
-
-/**
- * @description Represents a autocomplete component of the program.
- */
-export interface Autocomplete extends Component {
-	execute(interaction: Discord.AutocompleteInteraction): Promise<void>;
 }
