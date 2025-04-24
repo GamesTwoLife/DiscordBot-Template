@@ -10,5 +10,7 @@
 	"editor.trimAutoWhitespace": false,
 	"files.insertFinalNewline": true,
 	"files.eol": "\r\n",
-	"typescript.enablePromptUseWorkspaceTsdk": true
+	"typescript.enablePromptUseWorkspaceTsdk": true,
+	"javascript.suggestionActions.enabled": false,
+	"typescript.suggestionActions.enabled": false
 }

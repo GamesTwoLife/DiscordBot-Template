@@ -6,7 +6,7 @@ module.exports = {
 	name: Events.InteractionCreate,
 	/**
 	 * 
-	 * @param {import('discord.js').ModalSubmitInteraction & { client: import('../../typings').MainClient }} interaction 
+	 * @param {import('discord.js').ModalSubmitInteraction & { client: import("../../types/typings").MainClient }} interaction 
 	 */
 	async execute(interaction) {
 		const { client, guild, user } = interaction;

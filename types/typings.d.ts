@@ -1,7 +1,8 @@
 import * as Discord from "discord.js";
+
 declare type i18next = typeof import("i18next");
-declare type GuildDB = typeof import("./db/guilds");
-declare type UserDB = typeof import("./db/users");
+declare type GuildDB = typeof import("../db/guilds");
+declare type UserDB = typeof import("../db/users");
 
 export type ComponentType = "button" | "selectmenu" | "modalSubmit";
 
@@ -15,7 +16,7 @@ export interface MainClient extends Discord.Client {
 	dbguild: GuildDB;
 	dbuser: UserDB;
 	i18n: i18next;
-};
+}
 
 /**
  * @description Represents the program command.
@@ -23,15 +24,23 @@ export interface MainClient extends Discord.Client {
 export interface Command {
 	data: Discord.SlashCommandBuilder | Discord.ContextMenuCommandBuilder;
 	options: {
-		cooldown?: number,
-		ownerOnly?: boolean,
-		devGuildOnly?: boolean,
-		bot_permissions?: Discord.PermissionResolvable
+		cooldown?: number;
+		ownerOnly?: boolean;
+		devGuildOnly?: boolean;
+		bot_permissions?: Discord.PermissionResolvable;
 	};
 
-	execute(interaction: (Discord.ChatInputCommandInteraction | Discord.ContextMenuCommandInteraction) & { client: MainClient }): void | Promise<void>;
-	autocomplete(interaction: Discord.AutocompleteInteraction & { client: MainClient }): void | Promise<void>;
-};
+	execute(
+		interaction: (Discord.ChatInputCommandInteraction | Discord.ContextMenuCommandInteraction) & {
+		client: MainClient;
+		}
+	): void | Promise<void>;
+	autocomplete?(
+		interaction: Discord.AutocompleteInteraction & {
+		client: MainClient;
+		}
+	): void | Promise<void>;
+}
 
 /**
  * @description Represents a component of the program.
@@ -46,7 +55,12 @@ export interface Component {
 		bot_permissions?: [Discord.PermissionResolvable] | [];
 	};
 
-	execute(interaction: Discord.ButtonInteraction | Discord.AnySelectMenuInteraction | Discord.ModalSubmitInteraction): Promise<void>;
+	execute(
+		interaction:
+		| Discord.ButtonInteraction
+		| Discord.AnySelectMenuInteraction
+		| Discord.ModalSubmitInteraction
+	): Promise<void>;
 }
 
 /**
@@ -60,7 +74,14 @@ export interface Button extends Component {
  * @description Represents a any select menu component of the program.
  */
 export interface SelectMenu extends Component {
-	execute(interaction: Discord.StringSelectMenuInteraction | Discord.UserSelectMenuInteraction | Discord.MentionableSelectMenuInteraction | Discord.ChannelSelectMenuInteraction | Discord.RoleSelectMenuInteraction): Promise<void>;
+	execute(
+		interaction:
+		| Discord.StringSelectMenuInteraction
+		| Discord.UserSelectMenuInteraction
+		| Discord.MentionableSelectMenuInteraction
+		| Discord.ChannelSelectMenuInteraction
+		| Discord.RoleSelectMenuInteraction
+	): Promise<void>;
 }
 
 /**

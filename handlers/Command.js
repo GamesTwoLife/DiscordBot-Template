@@ -1,10 +1,9 @@
 const { readdir } = require("fs/promises");
 const { join } = require("path");
 
-
 /**
  * 
- * @param {import("./../typings").MainClient} client 
+ * @param {import("../types/typings").MainClient} client 
  */
 module.exports = async (client) => {
 	const commandsBasePath = join(__dirname, "../commands");
@@ -18,7 +17,7 @@ module.exports = async (client) => {
 			try {
 				const commandPath = join(modulePath, commandFile);
 
-				/** @type {import("./../typings").Command} */
+				/** @type {import("../types/typings").Command} */
 				const command = require(commandPath);
 
 				command.folder = module;

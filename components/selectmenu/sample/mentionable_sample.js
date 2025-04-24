@@ -1,7 +1,7 @@
 const { MessageFlags } = require("discord.js");
 
 /**
- * @type {import("../../../typings").MentionableSelectMenu}
+ * @type {import("../../../types/typings").MentionableSelectMenu}
  */
 module.exports = {
 	name: "mentionable_sample",

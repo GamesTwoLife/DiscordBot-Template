@@ -6,7 +6,7 @@ module.exports = {
 	
 	/**
 	 * 
-	 * @param {import('../../typings').MainClient} client 
+	 * @param {import("../../types/typings").MainClient} client 
 	 */
 	execute(client) {
 		console.log(`Ready! Logged in as ${client.user.tag}`);

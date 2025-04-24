@@ -1,7 +1,7 @@
 const { MessageFlags } = require("discord.js");
 
 /**
- * @type {import("../../../typings").ChannelSelectMenu}
+ * @type {import("../../../types/typings").ChannelSelectMenu}
  */
 module.exports = {
 	name: "channel_sample",

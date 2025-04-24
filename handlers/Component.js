@@ -4,7 +4,7 @@ const { join } = require("path");
 
 /**
  * 
- * @param {import("./../typings").MainClient} client 
+ * @param {import("../types/typings").MainClient} client 
  */
 module.exports = async (client) => {
 	const componentsBasePath = join(__dirname, "../components/");
@@ -17,7 +17,7 @@ module.exports = async (client) => {
 			for (const file of files) {
 				if (!file.endsWith('.js')) continue;
 				try {
-					/** @type {import("./../typings").Component} */
+					/** @type {import("../types/typings").Component} */
 					const component = require(join(modulePath, folder, file));
 	
 					if (!client.components.has(component.customId)) {

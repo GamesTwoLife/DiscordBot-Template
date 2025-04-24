@@ -3,7 +3,7 @@ const { token, clientId, guildId } = require("./../config.json");
 
 /**
  * 
- * @param {import("./../typings").MainClient} client 
+ * @param {import("../types/typings").MainClient} client 
  */
 module.exports = async (client) => {
 	try {

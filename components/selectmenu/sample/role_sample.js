@@ -1,7 +1,7 @@
 const { MessageFlags } = require("discord.js");
 
 /**
- * @type {import("../../../typings").RoleSelectMenu}
+ * @type {import("../../../types/typings").RoleSelectMenu}
  */
 module.exports = {
 	name: "role_sample",

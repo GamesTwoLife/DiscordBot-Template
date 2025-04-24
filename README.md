@@ -1,6 +1,6 @@
 # Ласкаво просимо до шаблону дискорд бота
 
-![Version](https://img.shields.io/badge/версія-v1.4.0-blue.svg)
+![Version](https://img.shields.io/badge/версія-v1.4.1-blue.svg)
 [![npm version](https://img.shields.io/npm/v/discord.js.svg)](https://www.npmjs.com/package/discord.js)
 [![Документація](https://img.shields.io/badge/Документація-yes-brightgreen.svg)](https://github.com/GamesTwoLife/DiscordBot-Template#readme)
 [![Підтримується](https://img.shields.io/badge/Підтримується%3F-yes-green.svg)](https://github.com/GamesTwoLife/DiscordBot-Template/graphs/commit-activity)

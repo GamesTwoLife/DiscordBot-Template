@@ -4,7 +4,7 @@ const buttonPagination = require("../../utils/buttonPagination");
 const buttonWrapper = require("../../utils/buttonWrapper");
 
 /**
- * @type {import('../../typings').Command}
+ * @type {import("../../types/typings").Command}
  */
 module.exports = {
 	data: new SlashCommandBuilder()

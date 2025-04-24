@@ -12,7 +12,7 @@ const i18next = require("i18next");
 const resources = require("./locales/resources");
 
 /**
- * @type {import("./typings").MainClient}
+ * @type {import("./types/typings").MainClient}
  * @description The main client of the program
  */
 const client = new Client({

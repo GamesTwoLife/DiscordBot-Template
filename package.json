@@ -1,8 +1,10 @@
 {
 	"name": "discordbot-template",
-	"version": "1.4.0",
+	"version": "1.4.1",
 	"description": "A discord.js bot template written with JavaScript",
+	"type": "commonjs",
 	"main": "index.js",
+	"types": "types/typings.d.ts",
 	"scripts": {
 		"start": "node ."
 	},

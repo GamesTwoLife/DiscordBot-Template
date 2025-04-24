@@ -2,7 +2,7 @@ const { ContextMenuCommandBuilder, ApplicationCommandType, InteractionContextTyp
 const { t } = require("i18next");
 
 /**
- * @type {import("../../typings").Command}
+ * @type {import("../../types/typings").Command}
  */
 module.exports = {
 	data: new ContextMenuCommandBuilder()

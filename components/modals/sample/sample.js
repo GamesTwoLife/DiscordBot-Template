@@ -1,7 +1,7 @@
 const { MessageFlags } = require("discord.js");
 
 /**
- * @type {import("../../../typings").Modal}
+ * @type {import("../../../types/typings").Modal}
  */
 module.exports = {
 	name: "sample",

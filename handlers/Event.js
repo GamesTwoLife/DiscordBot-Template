@@ -5,7 +5,7 @@ const { join } = require("path");
 const restEvents = ["restDebug", "handlerSweep", "hashSweep", "invalidRequestWarning", "rateLimited", "response"];
 
 /**
- * @param {import("./../typings").MainClient} client 
+ * @param {import("./../types/typings").MainClient} client 
  */
 module.exports = async (client) => {
 	const eventsBasePath = join(__dirname, "../events");

@@ -1,7 +1,7 @@
 const { MessageFlags } = require("discord.js");
 
 /**
- * @type {import("../../../typings").Button}
+ * @type {import("../../../types/typings").Button}
  */
 module.exports = {
 	name: "say_hello",
