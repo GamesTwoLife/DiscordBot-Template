@@ -1,6 +1,6 @@
 {
 	"name": "discordbot-template",
-	"version": "1.4.1",
+	"version": "1.5.0",
 	"description": "A discord.js bot template written with JavaScript",
 	"type": "commonjs",
 	"main": "index.js",
@@ -37,7 +37,7 @@
 	},
 	"homepage": "https://github.com/GamesTwoLife/DiscordBot-Template#readme",
 	"dependencies": {
-		"discord.js": "^14.18.0",
+		"discord.js": "^14.19.1",
 		"fs": "^0.0.1-security",
 		"i18next": "^23.10.0",
 		"mongoose": "^7.0.2",

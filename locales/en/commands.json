@@ -38,6 +38,9 @@
 				],
 				"footer": "Page {{currentPage}}/{{totalPages}}"
 			},
+			"pagination_v2": {
+				"description": "Sample Pagination V2."
+			},
 			"buttonwrapper": {
 				"description": "Sample Button Wrapper.",
 				"content": "Click on the buttons below:",

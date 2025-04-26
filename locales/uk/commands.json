@@ -38,6 +38,9 @@
 				],
 				"footer": "Сторінка {{currentPage}}/{{totalPages}}"
 			},
+			"pagination_v2": {
+				"description": "Приклад пагінації V2."
+			},
 			"buttonwrapper": {
 				"description": "Зразок обгортки для кнопок.",
 				"content": "Натискайте на кнопки знизу:",

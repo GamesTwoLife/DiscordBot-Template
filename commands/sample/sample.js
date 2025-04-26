@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, EmbedBuilder, UserSelectMenuBuilder, ChannelSelectMenuBuilder, MentionableSelectMenuBuilder, RoleSelectMenuBuilder, PollLayoutType, InteractionContextType, ApplicationIntegrationType } = require("discord.js");
 const { t } = require("i18next");
 const buttonPagination = require("../../utils/buttonPagination");
+const buttonPaginationV2 = require("../../utils/buttonPaginationV2");
 const buttonWrapper = require("../../utils/buttonWrapper");
 
 /**
@@ -62,6 +63,14 @@ module.exports = {
 				.setDescription(t('commands:sample.sample.pagination.description', { lng: "en" }))
 				.setDescriptionLocalizations({
 					uk: t('commands:sample.sample.pagination.description', { lng: "uk" })
+				})
+		)
+		.addSubcommand(subcommand =>
+			subcommand
+				.setName("pagination_v2")
+				.setDescription(t('commands:sample.sample.pagination_v2.description', { lng: "en" }))
+				.setDescriptionLocalizations({
+					uk: t('commands:sample.sample.pagination_v2.description', { lng: "uk" })
 				})
 		)
 		.addSubcommand(subcommand =>
@@ -178,6 +187,19 @@ module.exports = {
 
 				await buttonPagination(interaction, embeds);
 			} break;
+			
+			case "pagination_v2":
+				{
+					const pages = [];
+					for (let i = 0; i < 5; i++) {
+						pages.push(
+							t(`commands:sample.sample.pagination.pageStrings.${i}`, { lng: interaction.locale })
+						);
+					}
+					
+					await buttonPaginationV2(interaction, pages);
+				}
+				break;
 
 			case "buttonwrapper": {
 				const buttons = [

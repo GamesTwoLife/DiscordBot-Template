@@ -1,104 +1,104 @@
-# Ласкаво просимо до шаблону дискорд бота
+# Welcome to the Discord Bot Template
 
-![Version](https://img.shields.io/badge/версія-v1.4.1-blue.svg)
+![Version](https://img.shields.io/badge/version-v1.5.0-blue.svg)
 [![npm version](https://img.shields.io/npm/v/discord.js.svg)](https://www.npmjs.com/package/discord.js)
-[![Документація](https://img.shields.io/badge/Документація-yes-brightgreen.svg)](https://github.com/GamesTwoLife/DiscordBot-Template#readme)
-[![Підтримується](https://img.shields.io/badge/Підтримується%3F-yes-green.svg)](https://github.com/GamesTwoLife/DiscordBot-Template/graphs/commit-activity)
+[![Documentation](https://img.shields.io/badge/Documentation-yes-brightgreen.svg)](https://github.com/GamesTwoLife/DiscordBot-Template#readme)
+[![Maintained](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/GamesTwoLife/DiscordBot-Template/graphs/commit-activity)
 
-> Шаблон бота з **відкритим вихідним кодом** `discord.js`, який базується на офіційному [посібнику з discord.js](https://discordjs.guide/), щоб розпочати створення свого особистого бота для Discord!
+> An **open-source** `discord.js` bot template based on the official [discord.js guide](https://discordjs.guide/) to help you start building your own personal Discord bot!
 
-## [Домашня сторінка](https://github.com/GamesTwoLife/DiscordBot-Template#readme)
+## [Homepage](https://github.com/GamesTwoLife/DiscordBot-Template#readme)
 
-## Введення
+## Introduction
 
-Discord Bot Template — це шаблон бота з відкритим вихідним кодом на основі discord.js для початку роботи над новим проектом бота. Це класичний шаблон javascript, який не вимагає жодних зовнішніх залежностей, на відміну від інших відомих фреймворків. (Це не фреймворк!)
-За допомогою цього шаблону можна масштабувати будь-який проект бота. (на основі одного або кількох серверів) Все залежить від вашої творчості!
+The Discord Bot Template is an open-source `discord.js` bot template designed to kickstart your new bot project.  
+It's a classic JavaScript template that doesn't require any external dependencies, unlike many popular frameworks. (This is **not** a framework!)
+With this template, you can scale any bot project (whether for one or multiple servers). It all depends on your creativity!
 
-### Особливості
+### Features
 
-Цей шаблон містить багато вбудованих корисних і гнучких функцій, наприклад:
+This template includes many built-in, useful, and flexible features such as:
 
-#### • **Динамічний обробник подій:**
+#### • **Dynamic Event Handler:**
 
-- Усі події зберігаються в папці [events](https://github.com/GamesTwoLife/DiscordBot-Template/blob/master/events/). Вам не потрібно використовувати `client.on()` в основному файлі `index.js` для обробки подій.
-- Використовуючи простий каркасний код для подій, ви можете створити будь-яку кількість подій у папці подій за допомогою обробника подій.
+- All events are stored in the [events](https://github.com/GamesTwoLife/DiscordBot-Template/blob/master/events/) folder. You don't need to use `client.on()` in the main `index.js` file to handle events.
+- Using a simple event scaffold, you can create as many event files as you want inside the events folder.
 
-#### • **Динамічний обробник команд (як слеш так і контекстного меню):**
+#### • **Dynamic Command Handler (for both Slash and Context Menu commands):**
 
-- Мій шаблон постачається з динамічним обробником команд, який дуже легко налаштовувати та створювати команди.
-- Команди в папці commands отримують об’єкт [`ChatInputCommandInteraction`](https://discord.js.org/docs/packages/discord.js/14.18.0/ChatInputCommandInteraction:Class) або [`ContextMenuCommandInteraction`](https://discord.js.org/docs/packages/discord.js/14.18.0/ContextMenuCommandInteraction:Class) в залежності від типу команди (слеш або контекстна).
-- **ВАЖЛИВО:** У шаблоні ми надсилаємо команди в Discord для реєстрації лише в 1 гільдії. Це тому, що є 2 типи команд, гільдійські та глобальні. Команди гільдії обмежені 1 гільдією, але щоразу, коли ви їх оновлюєте, вони набувають чинності негайно, тоді як для глобальних команд потрібно до 1 години. Тому використовуйте команди гільди у розробці та глобальні команди для виробництва. (змінити це можна використавши параметр в кожному файлі команди `devGuildOnly`: `true` - команда в 1 гільдії, `false` - глобальна команда)
+- The template comes with a dynamic command handler that makes it very easy to set up and create commands.
+- Commands inside the commands folder receive a [`ChatInputCommandInteraction`](https://discord.js.org/docs/packages/discord.js/14.19.1/ChatInputCommandInteraction:Class) or a [`ContextMenuCommandInteraction`](https://discord.js.org/docs/packages/discord.js/14.19.1/ContextMenuCommandInteraction:Class) object depending on the command type (slash or context menu).
+- **IMPORTANT:** In this template, we register commands to Discord in only **one guild**. This is because there are two types of commands: guild and global. Guild commands are restricted to one server but update instantly, while global commands can take up to an hour to update. So, use guild commands during development and global commands in production. (You can change this by setting the `devGuildOnly` option in each command file: `true` for guild-only, `false` for global.)
 
-#### • **Динамічний обробник взаємодії кнопок:**
+#### • **Dynamic Button Interaction Handler:**
 
-- Цей шаблон поставляється з динамічним обробником взаємодії кнопок для отримання та обробки взаємодії кнопок.
-- Кнопки можна класифікувати в різних папках.
+- This template includes a dynamic button interaction handler to capture and process button interactions.
+- Buttons can be organized into different folders.
 
-#### • **Динамічний обробник взаємодії меню вибору:**
+#### • **Dynamic Select Menu Interaction Handler:**
 
-- Цей шаблон поставляється з динамічним обробником взаємодії меню вибору для отримання та обробки взаємодії меню вибору.
-- Меню можна класифікувати в різних папках.
+- This template includes a dynamic select menu interaction handler to capture and process select menu interactions.
+- Menus can be organized into different folders.
 
-#### • **Динамічний обробник взаємодії модальних вікон:**
+#### • **Dynamic Modal Submit Interaction Handler:**
 
-- Легко обробляйте вхідні модальні подання за допомогою обробника шаблонів!
-- Модальні вікна можна класифікувати в різних папках.
+- Easily handle incoming modal submissions using the template's handler!
+- Modals can be organized into different folders.
 
-#### • **Динамічний обробник взаємодії автозаповнень:**
+#### • **Dynamic Autocomplete Interaction Handler:**
 
-- Легко обробляйте вхідні запити автозаповнення за допомогою обробника шаблонів!
-- Ідеально динамічний для всіх ваших потреб!
+- Easily handle incoming autocomplete requests using the template's handler!
+- Fully dynamic for all your needs!
 
-#### • **Широкі можливості налаштування:**
+#### • **Highly Customizable:**
 
-Користуватися шаблоном так легко та весело, ви б знали. Оскільки шаблон не залежить від будь-яких зовнішніх залежностей і написаний на javascript, його можна налаштувати будь-яким чином. Вашій творчості немає кінця!
+Using the template is easy and fun — you'll see!  
+Since the template is written purely in JavaScript with no external dependencies, you can customize it however you want. Your creativity is the limit!
 
-#### • **З відкритим вихідним кодом і самостійно розміщено:**
+#### • **Open-Source and Self-Hosted:**
 
-> Це ваше, ви маєте повний контроль.
+> It's yours, you have full control.
 
-## Встановіть
+## Installation
 
 ```sh
 npm install
 ```
 
-## Налаштуйте
+## Configuration
 
-- Перейменуйте [`config-example.json`](https://github.com/GamesTwoLife/DiscordBot-Template/blob/master/config-example.json) на `config.json` та заповніть маркер бота, його ID та інші значення. Розширте `config.json` відповідно до ваших потреб!
+- Rename [`config-example.json`](https://github.com/GamesTwoLife/DiscordBot-Template/blob/master/config-example.json) to `config.json` and fill it with your bot's token, ID, and other values. Extend `config.json` according to your needs!
 
-## Запустіть свого бота
+## Run Your Bot
 
 ```sh
 npm start
 ```
 
-## Підтримка та документація
+## Support and Documentation
 
-Шаблон активно підтримується, якщо виникають якісь проблеми або запитання по роботі шаблону, зверніться до [мене в Discord](https://discord.gg/users/713064369705189446)
+The template is actively maintained. If you encounter any issues or have questions about the template, feel free to reach out to [me on Discord](https://discord.gg/users/713064369705189446).
 
-## Автор
+## Author
 
 ### GamesTwoLife
 
 - Github: [@GamesTwoLife](https://github.com/GamesTwoLife)
 
-### Дописувачі
+### Contributors
 
-Сюди може потрапити кожен, за внесок у розвиток проекту
+Everyone is welcome to contribute and be featured here!
 
-## Сприяння
+## Contributing
 
-Вітаються внески, проблеми та запити щодо функцій!
-Не соромтеся перевірити [сторінку проблем](https://github.com/GamesTwoLife/DiscordBot-Template/issues). Ви також можете ознайомитися з [посібником зі створення внеску](https://github.com/GamesTwoLife/DiscordBot-Template/blob/master/CONTRIBUTING.md).
+Contributions, issues, and feature requests are welcome!  
+Feel free to check the [issues page](https://github.com/GamesTwoLife/DiscordBot-Template/issues). You can also refer to the [contribution guide](https://github.com/GamesTwoLife/DiscordBot-Template/blob/master/CONTRIBUTING.md).
 
-## Продемонструйте вашу підтримку
+## Show Your Support
 
-Поставте ⭐️, якщо цей проект допоміг вам! Оцінка проекту надихає мене продовжувати його.
+Give a ⭐️ if this project helped you! Your support encourages me to keep maintaining it.
 
-## Ліцензія
+## License
 
-Copyright © 2023 [GamesTwoLife](https://github.com/GamesTwoLife).  
-Цей проект має ліцензію [MIT](LICENSE).
-
----
+Copyright © 2023 [GamesTwoLife](https://github.com/GamesTwoLife).
+This project is licensed under the [MIT License](LICENSE).
