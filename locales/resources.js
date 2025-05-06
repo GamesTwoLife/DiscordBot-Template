@@ -1,9 +1,9 @@
-const common_en = require("./en/common.json");
-const common_uk = require("./uk/common.json");
-const commands_en = require("./en/commands.json");
-const commands_uk = require("./uk/commands.json");
+import common_en from "./en/common.json" with { type: "json" };
+import common_uk from "./uk/common.json" with { type: "json" };
+import commands_en from "./en/commands.json" with { type: "json" };
+import commands_uk from "./uk/commands.json" with { type: "json" };
 
-module.exports = {
+export const resources = {
 	en: {
 		common: common_en,
 		commands: commands_en

@@ -1,6 +1,6 @@
-# Welcome to the Discord Bot Template
+# Discord.JS Bot Template — Clean, Scalable and Fully Customizable
 
-![Version](https://img.shields.io/badge/version-v1.5.0-blue.svg)
+![Version](https://img.shields.io/badge/version-v2.0.0-green.svg)
 [![npm version](https://img.shields.io/npm/v/discord.js.svg)](https://www.npmjs.com/package/discord.js)
 [![Documentation](https://img.shields.io/badge/Documentation-yes-brightgreen.svg)](https://github.com/GamesTwoLife/DiscordBot-Template#readme)
 [![Maintained](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/GamesTwoLife/DiscordBot-Template/graphs/commit-activity)
@@ -21,13 +21,13 @@ This template includes many built-in, useful, and flexible features such as:
 
 #### • **Dynamic Event Handler:**
 
-- All events are stored in the [events](https://github.com/GamesTwoLife/DiscordBot-Template/blob/master/events/) folder. You don't need to use `client.on()` in the main `index.js` file to handle events.
+- All events are stored in the [events](https://github.com/GamesTwoLife/DiscordBot-Template/blob/master/src/events/) folder. You don't need to use `client.on()` in the main `index.js` file to handle events.
 - Using a simple event scaffold, you can create as many event files as you want inside the events folder.
 
 #### • **Dynamic Command Handler (for both Slash and Context Menu commands):**
 
 - The template comes with a dynamic command handler that makes it very easy to set up and create commands.
-- Commands inside the commands folder receive a [`ChatInputCommandInteraction`](https://discord.js.org/docs/packages/discord.js/14.19.1/ChatInputCommandInteraction:Class) or a [`ContextMenuCommandInteraction`](https://discord.js.org/docs/packages/discord.js/14.19.1/ContextMenuCommandInteraction:Class) object depending on the command type (slash or context menu).
+- Commands inside the commands folder receive a [`ChatInputCommandInteraction`](https://discord.js.org/docs/packages/discord.js/14.19.3/ChatInputCommandInteraction:Class) or a [`ContextMenuCommandInteraction`](https://discord.js.org/docs/packages/discord.js/14.19.3/ContextMenuCommandInteraction:Class) object depending on the command type (slash or context menu).
 - **IMPORTANT:** In this template, we register commands to Discord in only **one guild**. This is because there are two types of commands: guild and global. Guild commands are restricted to one server but update instantly, while global commands can take up to an hour to update. So, use guild commands during development and global commands in production. (You can change this by setting the `devGuildOnly` option in each command file: `true` for guild-only, `false` for global.)
 
 #### • **Dynamic Button Interaction Handler:**
@@ -55,6 +55,8 @@ This template includes many built-in, useful, and flexible features such as:
 Using the template is easy and fun — you'll see!  
 Since the template is written purely in JavaScript with no external dependencies, you can customize it however you want. Your creativity is the limit!
 
+The template is implemented using plain JavaScript without any external dependencies, making it straightforward to extend and adapt to your specific requirements. Its modular architecture allows for full customization based on your project’s needs.
+
 #### • **Open-Source and Self-Hosted:**
 
 > It's yours, you have full control.
@@ -67,7 +69,13 @@ npm install
 
 ## Configuration
 
-- Rename [`config-example.json`](https://github.com/GamesTwoLife/DiscordBot-Template/blob/master/config-example.json) to `config.json` and fill it with your bot's token, ID, and other values. Extend `config.json` according to your needs!
+- Rename `.env-sample` to `.env` and fill in the required environment variables inside it (e.g., database URI, API tokens, or secrets etc).
+- Rename [`config-example.js`](https://github.com/GamesTwoLife/DiscordBot-Template/blob/master/config-example.js) to `config.js` and fill it with your bot's token, ID, and other values. Extend `config.js` according to your needs!
+- **REQUIRED VARIABLES:**
+- DISCORD_TOKEN=your_bot_token_here
+- MONGO_URI=your_mongodb-url_connection
+- CLIENT_ID=your_bot_client_id
+- DEV_GUILD_ID=your_guild_id_for_testing
 
 ## Run Your Bot
 
@@ -100,5 +108,5 @@ Give a ⭐️ if this project helped you! Your support encourages me to keep mai
 
 ## License
 
-Copyright © 2023 [GamesTwoLife](https://github.com/GamesTwoLife).
+Copyright © 2025 [GamesTwoLife](https://github.com/GamesTwoLife).
 This project is licensed under the [MIT License](LICENSE).

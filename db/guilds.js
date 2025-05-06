@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const GuildSchema = new mongoose.Schema({
 	guildID: { type: String, required: true },
@@ -12,4 +12,4 @@ const createGuild = (values) => new GuildModel(values).save().then((guild) => gu
 const deleteGuild = (guildID) => GuildModel.findOneAndDelete({ guildID });
 const updateGuild = (guildID, values) => GuildModel.findOneAndUpdate({ guildID }, values);
 
-module.exports = { GuildModel, getGuild, createGuild, deleteGuild, updateGuild };
+export default { GuildModel, getGuild, createGuild, deleteGuild, updateGuild };

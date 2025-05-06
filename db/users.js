@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
 	guildID: { type: String, required: true },
@@ -13,4 +13,4 @@ const createUser = (values) => new UserModel(values).save().then((user) => user.
 const deleteUser = (guildID, userID) => UserModel.findOneAndDelete({ guildID, userID });
 const updateUser = (guildID, userID, values) => UserModel.findOneAndUpdate({ guildID, userID }, values);
 
-module.exports = { UserModel, getUser, createUser, deleteUser, updateUser };
+export default { UserModel, getUser, createUser, deleteUser, updateUser };

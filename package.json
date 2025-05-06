@@ -1,12 +1,16 @@
 {
 	"name": "discordbot-template",
-	"version": "1.5.0",
+	"version": "2.0.0",
 	"description": "A discord.js bot template written with JavaScript",
-	"type": "commonjs",
+	"type": "module",
 	"main": "index.js",
-	"types": "types/typings.d.ts",
+	"types": "types/index.d.ts",
 	"scripts": {
 		"start": "node ."
+	},
+	"engines": {
+		"node": ">=18.0.0",
+		"npm": ">=9.0.0"
 	},
 	"repository": {
 		"type": "git",
@@ -37,10 +41,14 @@
 	},
 	"homepage": "https://github.com/GamesTwoLife/DiscordBot-Template#readme",
 	"dependencies": {
-		"discord.js": "^14.19.1",
+		"discord.js": "^14.19.3",
+		"dotenv": "^16.5.0",
 		"fs": "^0.0.1-security",
 		"i18next": "^23.10.0",
 		"mongoose": "^7.0.2",
 		"ms": "^2.1.3"
+	},
+	"devDependencies": {
+		"jest": "^29.7.0"
 	}
 }
