@@ -1,8 +1,14 @@
 import * as Discord from "discord.js";
 
 declare type i18next = typeof import("i18next");
-declare type GuildDB = typeof import("../db/guilds");
-declare type UserDB = typeof import("../db/users");
+
+import { GuildModel } from '../db/guilds';
+import { UserModel } from '../db/users';
+
+declare global {
+	type GuildModelType = typeof GuildModel;
+	type UserModelType = typeof UserModel;
+}
 
 export type ComponentType = "button" | "selectmenu" | "modalSubmit";
 
@@ -13,8 +19,8 @@ export interface MainClient extends Discord.Client {
 	commands: Discord.Collection<string, Command>;
 	cooldowns: Discord.Collection<string, Discord.Collection<string, number>>;
 	components: Discord.Collection<string, [Component]>;
-	dbguild: GuildDB;
-	dbuser: UserDB;
+	dbguild: GuildModelType;
+	dbuser: UserModelType;
 	i18n: i18next;
 }
 

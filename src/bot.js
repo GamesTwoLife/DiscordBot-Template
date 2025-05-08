@@ -5,8 +5,8 @@ import Event from "./handlers/Event.js";
 import Command from "./handlers/Command.js";
 import Component from "./handlers/Component.js";
 import SlashUpdate from "./handlers/SlashUpdate.js";
-import GuildDB from "./../db/guilds.js";
-import UserDB from "./../db/users.js";
+import { GuildModel } from "./../db/guilds.js";
+import { UserModel } from "./../db/users.js";
 
 import { init } from "i18next";
 import { resources } from "./../locales/resources.js";
@@ -53,8 +53,8 @@ client.commands = new Collection();
 client.cooldowns = new Collection();
 client.components = new Collection();
 
-client.dbguild = GuildDB;
-client.dbuser = UserDB;
+client.dbguild = GuildModel;
+client.dbuser = UserModel;
 
 // Anti-crash
 process.on('unhandledRejection', async (error) => {

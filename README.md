@@ -1,6 +1,6 @@
 # Discord.JS Bot Template — Clean, Scalable and Fully Customizable
 
-![Version](https://img.shields.io/badge/version-v2.0.0-green.svg)
+![Version](https://img.shields.io/badge/version-v2.0.1-green.svg)
 [![npm version](https://img.shields.io/npm/v/discord.js.svg)](https://www.npmjs.com/package/discord.js)
 [![Documentation](https://img.shields.io/badge/Documentation-yes-brightgreen.svg)](https://github.com/GamesTwoLife/DiscordBot-Template#readme)
 [![Maintained](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/GamesTwoLife/DiscordBot-Template/graphs/commit-activity)
