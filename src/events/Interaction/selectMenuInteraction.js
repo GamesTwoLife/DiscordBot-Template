@@ -6,7 +6,7 @@ export default {
 	name: Events.InteractionCreate,
 	/**
 	 * 
-	 * @param {import('discord.js').AnySelectMenuInteraction & { client: import("../../types/index.d.ts").MainClient }} interaction 
+	 * @param {import('discord.js').AnySelectMenuInteraction & { client: import("../../../types/index.d.ts").MainClient }} interaction 
 	 */
 	async execute(interaction) {
 		const { client, user } = interaction;
@@ -15,7 +15,15 @@ export default {
 		if (!interaction.isAnySelectMenu()) return;
 
 		try {
-			const selectmenus = client.components.get(interaction.customId)?.filter(component => component.type === "selectmenu");
+			const selectmenus = [];
+			for (const [key, components] of client.components) {
+				if (
+					(typeof key === "string" && key === interaction.customId) ||
+					(key instanceof RegExp && key.test(interaction.customId))
+				) {
+					selectmenus.push(...components.filter(c => c.type === "selectmenu"));
+				}
+			}
 
 			if (!selectmenus) return;
 

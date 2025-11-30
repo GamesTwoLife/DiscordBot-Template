@@ -6,7 +6,7 @@ export default {
 	name: Events.InteractionCreate,
 	/**
 	 * 
-	 * @param {import('discord.js').ModalSubmitInteraction & { client: import("../../types/index.d.ts").MainClient }} interaction 
+	 * @param {import('discord.js').ModalSubmitInteraction & { client: import("../../../types/index.d.ts").MainClient }} interaction 
 	 */
 	async execute(interaction) {
 		const { client, guild, user } = interaction;
@@ -14,7 +14,15 @@ export default {
 		if (!interaction.isModalSubmit()) return;
 
 		try {
-			const modals = client.components.get(interaction.customId)?.filter(component => component.type === "modalSubmit");
+			const modals = [];
+			for (const [key, components] of client.components) {
+				if (
+					(typeof key === "string" && key === interaction.customId) ||
+					(key instanceof RegExp && key.test(interaction.customId))
+				) {
+					modals.push(...components.filter(c => c.type === "modalSubmit"));
+				}
+			}
 
 			if (!modals) return;
 

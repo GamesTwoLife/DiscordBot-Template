@@ -5,7 +5,7 @@ export default {
 	name: Events.InteractionCreate,
 	/**
 	 * 
-	 * @param {import('discord.js').AutocompleteInteraction & { client: import("../../types/index.d.ts").MainClient }} interaction
+	 * @param {import('discord.js').AutocompleteInteraction & { client: import("../../../types/index.d.ts").MainClient }} interaction
 	 */
 	async execute(interaction) {
 		const { client, user } = interaction;

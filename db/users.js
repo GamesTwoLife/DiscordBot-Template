@@ -1,10 +1,38 @@
-import mongoose from "mongoose";
+import { DataTypes } from "sequelize";
 
-const UserSchema = new mongoose.Schema({
-	guildID: { type: String, required: true },
-	userID: { type: String, required: true },
-}, { timestamps: true });
-	
-UserSchema.index({ guildID: 1, userID: 1 }, { unique: true });
+/**
+ * 
+ * @param {import("sequelize").Sequelize} sequelize 
+ * @returns {import("sequelize").ModelCtor<import("sequelize").Model>}
+ */
+export const UserModel = (sequelize) => {
+	const User = sequelize.define('User', {
+		guildId: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+		userId: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+		balance: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			defaultValue: 0
+		},
+		lastTimely: {
+			type: DataTypes.DATE,
+			allowNull: true
+		},
+	}, {
+		indexes: [
+			{
+				name: 'unique_user_in_guild',
+				unique: true,
+				fields: ['guildId', 'userId']
+			}
+		]
+	});
 
-export const UserModel = mongoose.model('User', UserSchema);
+	return User;
+};

@@ -24,9 +24,30 @@ export default {
 		const { client } = interaction;
 
 		await interaction.deferReply()
+		
+		const dbStart = Date.now();
+		try {
+			await client.db.sequelize.query('SELECT 1', { raw: true }); 
+		} catch (error) {
+			console.error('Помилка запиту до БД:', error);
+		}
+		const dbLatency = Date.now() - dbStart;
+		
+		const redisStart = Date.now();
+		await client.redis.ping();
+		const redisLatency = Date.now() - redisStart;
 
 		const reply = await interaction.fetchReply()
 		
-		await interaction.editReply({ content: t('commands:info.ping.content', { lng: interaction.locale, ping: Math.round(client.ws.ping), latency: Math.round(reply.createdTimestamp - interaction.createdTimestamp) }) });
+		await interaction.editReply({
+			content: t('commands:info.ping.content',
+			{
+				lng: interaction.locale, 
+				ping: Math.round(client.ws.ping), 
+				latency: Math.round(reply.createdTimestamp - interaction.createdTimestamp),
+				dbLatency: dbLatency,
+				redisLatency: redisLatency
+			})
+		});
 	},
 };

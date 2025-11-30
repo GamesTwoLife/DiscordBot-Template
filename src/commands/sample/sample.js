@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, EmbedBuilder, UserSelectMenuBuilder, ChannelSelectMenuBuilder, MentionableSelectMenuBuilder, RoleSelectMenuBuilder, PollLayoutType, InteractionContextType, ApplicationIntegrationType } from "discord.js";
+import { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, EmbedBuilder, UserSelectMenuBuilder, ChannelSelectMenuBuilder, MentionableSelectMenuBuilder, RoleSelectMenuBuilder, PollLayoutType, InteractionContextType, ApplicationIntegrationType, LabelBuilder } from "discord.js";
 import { t } from "i18next";
 import buttonPagination from "../../utils/buttonPagination.js";
 import buttonPaginationV2 from "../../utils/buttonPaginationV2/index.js";
@@ -164,16 +164,19 @@ export default {
 				const modal = new ModalBuilder()
 					.setCustomId("sample")
 					.setTitle("Sample");
-
-				const input = new TextInputBuilder()
-					.setCustomId("input")
+				
+				const sampleInput = new TextInputBuilder()
+					.setCustomId("sample_input")
 					.setStyle(TextInputStyle.Short)
-					.setLabel("Input Text")
+					.setPlaceholder("Enter something...")
 					.setRequired(true);
+					
+				const sampleLabel = new LabelBuilder()
+					.setLabel("Sample Input")
+					.setDescription("This is a sample input field")
+					.setTextInputComponent(sampleInput);
 
-				const row = new ActionRowBuilder().addComponents([input]);
-
-				modal.setComponents(row);
+				modal.setLabelComponents(sampleLabel);
 
 				await interaction.showModal(modal)
 			} break;

@@ -1,9 +1,25 @@
-import mongoose from "mongoose";
+import { DataTypes } from "sequelize";
 
-const GuildSchema = new mongoose.Schema({
-	guildID: { type: String, required: true, unique: true },
-}, { timestamps: true });
-	
-GuildSchema.index({ guildID: 1 }, { unique: true });
+/**
+ * 
+ * @param {import("sequelize").Sequelize} sequelize 
+ * @returns {import("sequelize").ModelCtor<import("sequelize").Model>}
+ */
+export const GuildModel = (sequelize) => {
+	const Guild = sequelize.define('Guild', {
+		guildId: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+	}, {
+		indexes: [
+            {
+                name: 'unique_guild',
+                unique: true,
+                fields: ['guildId']
+            }
+        ]
+	});
 
-export const GuildModel = mongoose.model('Guild', GuildSchema);
+	return Guild;
+};

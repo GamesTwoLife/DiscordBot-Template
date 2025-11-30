@@ -7,7 +7,7 @@ const manager = new ShardingManager('./src/bot.js', {
 	respawn: true,
 	timeout: 60000,
 	token: config.token,
-	mode: 'worker',
+	mode: 'process',
 });
 
 manager.on("shardCreate", (shard) => {

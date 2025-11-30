@@ -6,7 +6,7 @@ export default {
 	name: Events.InteractionCreate,
 	/**
 	 * 
-	 * @param {import('discord.js').ButtonInteraction & { client: import("../../types/index.d.ts").MainClient }} interaction 
+	 * @param {import('discord.js').ButtonInteraction & { client: import("../../../types/index.d.ts").MainClient }} interaction 
 	 */
 	async execute(interaction) {
 		const { client, guild, user } = interaction;
@@ -15,7 +15,15 @@ export default {
 		if (!interaction.isButton()) return;
 
 		try {
-			const buttons = client.components.get(interaction.customId)?.filter(component => component.type === "button");
+			const buttons = [];
+			for (const [key, components] of client.components) {
+				if (
+					(typeof key === "string" && key === interaction.customId) ||
+					(key instanceof RegExp && key.test(interaction.customId))
+				) {
+					buttons.push(...components.filter(c => c.type === "button"));
+				}
+			}
 
 			if (!buttons) return;
 

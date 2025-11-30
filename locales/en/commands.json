@@ -2,7 +2,7 @@
 	"info": {
 		"ping": {
 			"description": "Bot ping and latency",
-			"content": "Discord Websocket Ping **{{ping}}**ms\nAnswer to commands: **{{latency}}**ms"
+			"content": "🏓 **Ping**: **{{ping}}ms**\n📡 **Latency API**: **{{latency}}ms**\n💾 **Latency Redis**: **{{redisLatency}}ms**\n📊 **Latency DB**: **{{dbLatency}}ms**"
 		}
 	},
 	"sample": {

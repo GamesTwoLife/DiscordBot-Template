@@ -12,7 +12,7 @@ export default {
 
 		const { fields } = interaction;
 
-		const input = fields.getTextInputValue('input');
+		const input = fields.getTextInputValue('sample_input');
 
 		return interaction.reply({ content: `${input}`, flags: MessageFlags.Ephemeral });
 	},

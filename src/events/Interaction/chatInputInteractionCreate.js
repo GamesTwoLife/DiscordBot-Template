@@ -6,7 +6,7 @@ export default {
 	name: Events.InteractionCreate,
 	/**
 	 * 
-	 * @param {import('discord.js').CommandInteraction & { client: import("../../types/index.d.ts").MainClient }} interaction 
+	 * @param {import('discord.js').CommandInteraction & { client: import("../../../types/index.d.ts").MainClient }} interaction 
 	 */
 	async execute(interaction) {
 		const { client, guild, user } = interaction;
